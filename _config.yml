@@ -1,26 +1,31 @@
 # Site settings
-title: Klise Theme # site title
+title: Blog jdetrizep # site title
 description: >- # site description
-  He's writing in Bahasa about web technology and experience as a journal 
-  for documentation things that he learned, meet him <a href="https://github.com/piharpi" target="_blank" rel="noopener">@github</a>.
-lang: en-US # default lang
-timezone: Asia/Jakarta # set your timezone
-image: assets/img/ogp.png # This image used for Open Graph more info https://ogp.me/
-repo: https://github.com/piharpi/jekyll-klise # site repo [optional]
+  Este es un blog de tecnología, orientado para amantes de desarrollo y para compartir conocimiento adquiridos, conozcalo en <a href="https://github.com/jdetrizep" target="_blank" rel="noopener">@github</a>.
+lang: en-ES # default lang
+timezone: GMT-6 # set your timezone
+image: assets/img/firma-correo-jorge-trinidad-zepeda.jpg # This image used for Open Graph more info https://ogp.me/
+repo: https://github.com/jdetrizep # site repo [optional]
 mode: dark # default theme "dark" | "light"
 
 # Profile settings
 author:
-  name: Jekyll Klisé # author name
+  name: Jorge De Trinidad Zepeda # author name
   bio: >- # tell to the world
-    The minimalist Jekyll theme, light and dark mode support, for running a personal site and blog, 
-    meet Klisé theme at <a href="https://github.com/piharpi/jekyll-klise" target="_blank" rel="noopener">@github</a>.
-  username: username # general username
-  github: github_username # github username
+    Experto en desarrollo de sistemas bancarios con +16 años  de experiencia.
+    Especializado en tecnologías móviles, backend y sistemas IBM i. <br>
+    <strong> IBM Contributor 2025 <strong> | Microsoft Certified Professional | Oracle Cloud Certified AI | Cybersecurity Awareness Professional |
+    Lean Six Sigma White Belt | Certified Scrum Master | IBM Enterprise Design Thinking. 
+  username: jdetrizep # general username
+  github: jdetrizep # github username
+  linkedin: jorge-de-trinidad-zepeda-13a4a454/ # linkedin username
   twitter: twitter_username # twitter username
   facebook: facebook_username # facebook username
-  email: your-email@email.com # email adress
-  avatar: /assets/img/avatar.jpg # change with your own avatar
+  email: jorgedetrinidad@outlook.com # email adress
+  avatar: /assets/img/foto-jorge-trinidad-zepeda.jpg # change with your own avatar
+  logoGit: /assets/img/github-mark-white.png # change with your own logo
+  logoLinkedin: /assets/img/Linkedin_ico.png # change with your own logo
+  logoCorreo: /assets/img/correo_ico.png # change with your own logo
 
 # URL settings
 url: "https://klise.now.sh" #
