@@ -28,7 +28,7 @@ author:
   logoCorreo: /assets/img/correo_ico.png # change with your own logo
 
 # URL settings
-url: "https://klise.now.sh" #
+url: "" #
 baseurl:
 permalink: /:title/
 google_analytics: # leave it blank if not wish

@@ -3,11 +3,11 @@
 Gem::Specification.new do |spec|
   spec.name     = "klise"
   spec.version  = "1.0.1"
-  spec.authors  = ["Mahendrata Harpi"]
-  spec.email    = ["justharpi@gmail.com"]
+  spec.authors  = ["Jorge De Trinidad Zepeda"]
+  spec.email    = ["jorgedetrinidad@outlook.com"]
 
-  spec.summary  = "🏖 Klisé is a minimalist Jekyll theme for running a personal site or blog, light & dark mode support."
-  spec.homepage = "https://github.com/piharpi/jekyll-klise"
+  spec.summary  = "Blog de desarrolladores"
+  spec.homepage = "https://github.com/jdetrizep/jdetrizep.dev"
   spec.license  = "MIT"
 
   spec.metadata["plugin_type"] = "theme"
