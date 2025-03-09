@@ -19,17 +19,22 @@ También soy profesor y mentor, ayudando a nuevos desarrolladores a mejorar sus 
 Aquí encontrarás artículos sobre:
 
 ✅ IBM i & AS400 – Modernización, desarrollo y mejores prácticas.
+
 ✅ DevOps y CI/CD – Flujo de trabajo, automatización, integración y entrega continua.
+
 ✅ Programación Backend – Java, C#, .NET y buenas prácticas en desarrollo.
+
 ✅ Arquitecturas en la Nube – Implementaciones en Azure y AWS.
+
 ✅ Inteligencia Artificial – Uso de IA en desarrollo, análisis de herramientas y ética.
+
 ✅ Mentoría y Crecimiento Profesional – Consejos para desarrolladores y buenas prácticas de código.
 
 ## 🛠 Tecnologías y Herramientas
 	•	Lenguajes: Java, C#, Kotlin, Swift, Objective-C, RPGLE, SQLRPGLE
-	•	Cloud & DevOps: Azure, AWS, IBM Cloud, Azure DevOps, CI/CD
-	•	Bases de Datos: DB2, SQL Server, PostgreSQL
-	•	IA & Automatización: Azure AI, OpenAI, Machine Learning
+	•	Cloud & DevOps: Azure, IBM Cloud, Azure DevOps, CI/CD
+	•	Bases de Datos: DB2, SQL Server, Oracle
+	•	IA & Automatización: Azure AI, OpenAI, Machine Learning, OCI AI
 
 ## 📢 Contacto & Redes
 
