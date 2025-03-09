@@ -1,61 +1,43 @@
-# Klisé
+# 📌 Blog Técnico - Jorge De Trinidad Zepeda
 
-Klisé is minimalist Jekyll theme for running a personal site and blog running on Jekyll.<br>
-For demo <a href="https://klise.now.sh" target="_blank" rel="noopener">klise.now.sh</a>
+Bienvenido a mi blog técnico, un espacio donde comparto conocimientos, experiencias y mejores prácticas sobre DevOps, desarrollo backend, arquitecturas en la nube, inteligencia artificial aplicada a la programación y mucho más.
 
-## Features
+## 🚀 Sobre mí
 
-- [x] Light & Dark Mode support :waxing_crescent_moon:
-- [x] Customizable (using `.scss`)
-- [x] Responsive (desktop, tab and mobile)
-- [x] Mobile First Design
-- [x] SEO Optimized
-- [x] Images of post Organized ([`jekyll-postfiles`](https://github.com/nhoizey/jekyll-postfiles))
-- [x] Generate Sitemap ([`jekyll-sitemap`](https://github.com/jekyll/jekyll-sitemap))
-- [x] RSS Feed ([`jekyll-feed`](https://github.com/jekyll/jekyll-feed))
-- [x] Syntax Highlighter ([`rouge`](https://github.com/rouge-ruby/rouge))
-- [x] Next & Previous Post
-- [x] Comment layout, enable in frontmatter if you wish
-- [x] Google analytics
-- [x] HTML Minify ([`jekyll-compress-html`](https://github.com/penibelst/jekyll-compress-html))
-- [x] W3C **Validated**
-- [x] Lighthouse and PageSpeed **Passed**
+Soy un Expert Coach con más de 15 años de experiencia en desarrollo de sistemas bancarios, especializado en Java, C#, .NET, IBM i, Azure, AWS, CI/CD y DevOps. Además, soy IBM Contributor 2025 y cuento con múltiples certificaciones, incluyendo:
+	•	DevOps Engineer (CM-DOTP)
+	•	IBM i Ready
+	•	MCP (Microsoft Certified Professional)
+	•	Cybersecurity Awareness Professional
+	•	Azure AI Fundamentals
+	•	Oracle Cloud Infrastructure AI Foundations Associate
 
-![Lighthouse Result](./lighthouse.png)
+También soy profesor y mentor, ayudando a nuevos desarrolladores a mejorar sus habilidades en programación y buenas prácticas.
 
-## Backlogs
+## ✍️ Contenido del Blog
 
-- [ ] Intergrated with PhotoSwipe.
-- [ ] Add schema.org meta information.
-- [ ] Transform class selector to BEM metodology.
+Aquí encontrarás artículos sobre:
 
-## Installation
+✅ IBM i & AS400 – Modernización, desarrollo y mejores prácticas.
+✅ DevOps y CI/CD – Flujo de trabajo, automatización, integración y entrega continua.
+✅ Programación Backend – Java, C#, .NET y buenas prácticas en desarrollo.
+✅ Arquitecturas en la Nube – Implementaciones en Azure y AWS.
+✅ Inteligencia Artificial – Uso de IA en desarrollo, análisis de herramientas y ética.
+✅ Mentoría y Crecimiento Profesional – Consejos para desarrolladores y buenas prácticas de código.
 
-Run local server:
+## 🛠 Tecnologías y Herramientas
+	•	Lenguajes: Java, C#, Kotlin, Swift, Objective-C, RPGLE, SQLRPGLE
+	•	Cloud & DevOps: Azure, AWS, IBM Cloud, Azure DevOps, CI/CD
+	•	Bases de Datos: DB2, SQL Server, PostgreSQL
+	•	IA & Automatización: Azure AI, OpenAI, Machine Learning
 
-```bash
-$ git clone https://github.com/piharpi/jekyll-klise.git
-$ cd jekyll-klise
-$ bundle install
-$ bundle exec jekyll serve
-```
+## 📢 Contacto & Redes
 
-Navigate to `localhost:4000`. You're Welcome, Fork and be Stargazer.
+Si quieres estar al tanto de nuevos artículos o intercambiar ideas, puedes encontrarme en:
+🔗 [[LinkedIn](https://www.linkedin.com/in/jorge-de-trinidad-zepeda-13a4a454/), [GitHub](https://github.com/jdetrizep)]
 
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/piharpi/jekyll-klise) [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/piharpi/jekyll-klise) [![Deploy to Azure button](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/?feature.customportal=false&WT.mc_id=javascript-0000-jopapa#create/Microsoft.StaticApp)
+¡Gracias por visitar el blog! Espero que encuentres información útil y que podamos aprender juntos. 🚀
 
-## Limitation
-
-- Since [`jekyll-postfiles`](https://github.com/nhoizey/jekyll-postfiles#compatibility) plugin isn't supported by github pages, this cause will make your site problems, path broken or post images won't show up, you can host alternatively using likes [netlify.com](https://netlify.com), [vercel.com](https://vercel.com), [azure.com](https://docs.microsoft.com/azure/static-web-apps/publish-jekyll) or [surge.sh](https://surge.sh) services, which support 3rd party.
-
-## Contributing
-
-If you see any typos or formatting errors in a post, or want to helping reduce backlogs or any other issue that needs to be addressed, please do not hesitate to open a pull request and fix it!, please read [contributing](./CONTRIBUTING.md) before PR.
-
-Yeaaa feel free to open a pull request.
-## Support
-
-[![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/W7W7MJ4X) [![saweria.co](./assets/img/saweria-button.png)](https://saweria.co/piharpi)
 ## License
 
 This project is open source and available under the [MIT License](LICENSE).
