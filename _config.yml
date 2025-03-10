@@ -4,7 +4,7 @@ description: >- # site description
   Este es un blog de tecnología, orientado para amantes de desarrollo y para compartir conocimiento adquiridos.
 lang: en-ES # default lang
 timezone: GMT-6 # set your timezone
-image: assets/img/firma-correo-jorge-trinidad-zepeda.jpg # This image used for Open Graph more info https://ogp.me/
+image: assets/img/jdetri_logo_binary.jpg # This image used for Open Graph more info https://ogp.me/
 repo: https://github.com/jdetrizep # site repo [optional]
 mode: dark # default theme "dark" | "light"
 
