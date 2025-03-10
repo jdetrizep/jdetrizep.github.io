@@ -26,21 +26,21 @@ En este blog compartiré contenido sobre **DevOps, CI/CD, desarrollo backend, ar
 
 ## Puedes encontrarme ✨
 
-<a href="http://github.com/{{ site.author.github }}" target="_blank" rel="">
+<a href="http://github.com/{{ site.author.github }}" target="" rel="">
 <img
     src="{{ site.author.logoGit }}"
     alt="{{ site.author.github }}"
     style="width:20px;height:20px;"
 />
 </a>
-<a href="https://www.linkedin.com/in/{{ site.author.linkedin }}" target="_blank" rel="">
+<a href="https://www.linkedin.com/in/{{ site.author.linkedin }}" target="" rel="">
 <img
     src="{{ site.author.logoLinkedin }}"
     alt="{{ site.author.linkedin }}"
     style="width:25px;height:25px;"
 />
 </a>
-<a href="mailto:{{ site.author.email }}" target="_blank" rel="">
+<a href="mailto:{{ site.author.email }}" target="" rel="">
 <img
     src="{{ site.author.logoCorreo }}"
     alt="{{ site.author.email }}"
