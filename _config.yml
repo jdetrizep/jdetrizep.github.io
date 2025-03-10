@@ -26,6 +26,7 @@ author:
   logoGit: /assets/img/github-mark-white.png # change with your own logo
   logoLinkedin: /assets/img/Linkedin_ico.png # change with your own logo
   logoCorreo: /assets/img/correo_ico.png # change with your own logo
+  logosite: /assets/favicons/jdetri_logo_180x180.png # change with your own logo
 
 # URL settings
 url: "" #

@@ -33,8 +33,11 @@ layout: compress
 
   {% include navbar.html %}
   <div class="wrapper">
-    <header class="header">
-      <h1 class="header-title center" itemprop="headline">{{ page.title | escape }}.</h1>
+    <header >
+      <div class="author" style="margin-bottom: 85.2; margin-top: 80.8; margin-top: 20px; margin-bottom: 0px;">
+        <img class="author-avatar" src="{{ site.author.logosite }}" alt="{{ site.author.username }}" />
+        <h1 class="header-title center" itemprop="headline">{{ page.title | escape }}.</h1>
+      </div>
     </header>
     <main class="page-content" aria-label="Content">
       {% include anchor_headings.html html=content anchorClass="anchor-head" beforeHeading=true h_min=4 h_max=4 %}
