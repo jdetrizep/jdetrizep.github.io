@@ -32,7 +32,7 @@ author:
 url: "" #
 baseurl:
 permalink: /:title/
-google_analytics: # leave it blank if not wish
+google_analytics: G-KQCBK0PDYH # leave it blank if not wish
 fb_appid:
 
 # Collection setting
