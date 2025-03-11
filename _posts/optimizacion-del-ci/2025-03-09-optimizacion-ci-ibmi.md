@@ -46,7 +46,7 @@ Full Free RPG ha modernizado la programación en IBM i, facilitando la transici�
 
 <figure>
 <img src="./DevOps_futurista.png" alt="Imagen muesta el futuro de DevOps con Inteligenia Artificial">
-<figcaption>Fig 1. Gráfica de futuro de DevOps con AI.</figcaption>
+<figcaption>Fig 2. AI apoyando el DevOps.</figcaption>
 </figure>
 Aquí es donde herramientas de **IA y DevOps** pueden marcar la diferencia.
 
