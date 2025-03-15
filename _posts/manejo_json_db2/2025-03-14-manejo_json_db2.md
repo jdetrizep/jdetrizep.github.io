@@ -8,7 +8,7 @@ tag:
   - IBM i
   - DB2/400
   - JSON
-image: /manejo_json_db2/Developer_JSON_DB2.png
+image: /manejo_json_db2/JSON_DB2.png
 ---
 
 # Manejo de JSON con DB2/400: Almacenamiento y Consultas con CLOB
@@ -18,7 +18,7 @@ El formato JSON se ha convertido en un estándar en la transferencia y almacenam
 En este artículo, exploraremos cómo almacenar, consultar y manipular datos JSON en DB2/400 utilizando `CLOB` y funciones nativas de JSON.
 
 <figure>
-<img src="./JSON_DB2.png" alt="Representación de JSON en DB2/400">
+<img src="./Developer_JSON_DB2.png" alt="Representación de JSON en DB2/400">
 <figcaption>Fig 1. Representación de JSON en DB2/400.</figcaption>
 </figure>
 
