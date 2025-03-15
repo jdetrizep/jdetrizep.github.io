@@ -1,9 +1,9 @@
 ---
 layout: post
-title: Manejo de JSON con DB2/400
+title: Manejo de JSON con DB2
 date: 2025-03-09 15:00
 modified: 2025-03-09 15:00
-description: Manejo de JSON con DB2/400 - Almacenamiento y Consultas con CLOB
+description: Manejo de JSON con DB2 - Almacenamiento y Consultas con CLOB
 tag:
   - IBM i
   - DB2/400
@@ -13,7 +13,7 @@ image: /manejo_json_db2/Developer_JSON_DB2.png
 
 # Manejo de JSON con DB2/400: Almacenamiento y Consultas con CLOB
 
-El formato JSON se ha convertido en un estándar en la transferencia y almacenamiento de datos en aplicaciones modernas. En IBM DB2 para IBM i (antes conocido como DB2/400), no existe un tipo de dato específico para JSON, pero IBM recomienda el uso de CLOB (Character Large Object) debido a su compatibilidad con estructuras de texto de gran tamaño, lo que lo hace ideal para almacenar documentos JSON.
+El formato `JSON` se ha convertido en un estándar en la transferencia y almacenamiento de datos en aplicaciones modernas. En IBM DB2 para IBM i (antes conocido como DB2/400), no existe un tipo de dato específico para JSON, pero IBM recomienda el uso de CLOB (Character Large Object) debido a su compatibilidad con estructuras de texto de gran tamaño, lo que lo hace ideal para almacenar documentos JSON.
 
 En este artículo, exploraremos cómo almacenar, consultar y manipular datos JSON en DB2/400 utilizando CLOB y funciones nativas de JSON.
 
