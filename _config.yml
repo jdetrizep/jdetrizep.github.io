@@ -3,7 +3,7 @@ title: Blog jdetrizep # site title
 description: >- # site description
   Este es un blog de tecnología, orientado para amantes de desarrollo y para compartir conocimiento adquiridos.
 lang: en-ES # default lang
-timezone: GMT-6 # set your timezone
+timezone: America/Costa_Rica # set your timezone
 image: assets/img/jdetri_logo_binary.jpg # Imagen para compartir en redes sociales
 repo: https://github.com/jdetrizep # site repo [optional]
 mode: dark # default theme "dark" | "light"
@@ -14,7 +14,7 @@ author:
   bio: >- # tell to the world
     Experto en desarrollo de sistemas bancarios con +16 años  de experiencia.
     Especializado en tecnologías móviles, backend y sistemas IBM i. <br>
-    <strong> IBM Contributor 2025 <strong> | Microsoft Certified Professional | Oracle Cloud Certified AI | Cybersecurity Awareness Professional |
+    <strong> IBM Advocate 2025 | IBM Contributor 2025 <strong> | Microsoft Certified Professional | Oracle Cloud Certified AI | Cybersecurity Awareness Professional |
     Lean Six Sigma White Belt | Certified Scrum Master | IBM Enterprise Design Thinking. 
   username: jdetrizep # general username
   github: jdetrizep # github username
@@ -30,7 +30,7 @@ author:
 
 # URL settings
 url: "" #
-baseurl:
+baseurl: "" # leave it blank if not wish
 permalink: /:title/
 google_analytics: G-KQCBK0PDYH # leave it blank if not wish
 fb_appid:
