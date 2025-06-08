@@ -1,8 +1,8 @@
 ---
 layout: post
 title: Asistentes Inteligentes para IBM i
-date: 2025-06-09 08:00
-modified: 2025-06-09 08:00
+date: 2025-06-08 08:00
+modified: 2025-06-08 08:00
 description: Asistentes Inteligentes para IBM i - De un gran aliado a una nueva promesa
 tag:
   - IBM i
