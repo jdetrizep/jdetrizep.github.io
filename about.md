@@ -9,7 +9,7 @@ Soy un **Expert Coach** con más de 15 años de experiencia en desarrollo de sis
 
 Además de mi trabajo en el desarrollo de software, soy **profesor y mentor** de nuevos programadores, ayudándolos a fortalecer sus habilidades en Java, AS400 y bases de datos DB2. Me apasiona la enseñanza y la adopción de buenas prácticas de programación, estándares modernos y el uso responsable de la inteligencia artificial en el desarrollo de software.
 
-Soy **IBM Advocate 2025** e **IBM Contributor 2025**, lo que refleja mi compromiso con la innovación y la comunidad de desarrolladores en tecnologías IBM. También cuento con certificaciones en:
+Soy **IBM Influencer 2025**, **IBM Advocate 2025** e **IBM Contributor 2025**, lo que refleja mi compromiso con la innovación y la comunidad de desarrolladores en tecnologías IBM. También cuento con certificaciones en:
 <ul>
     <li>DevOps Engineer (CM-DOTP)</li>
     <li>IBM i Ready</li>
