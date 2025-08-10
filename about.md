@@ -16,6 +16,7 @@ Soy **IBM Influencer 2025**, **IBM Advocate 2025** e **IBM Contributor 2025**, l
     <li>Azure AI Fundamentals</li>
     <li>IBM Artificial Intelligence Fundamentals</li>
     <li>Oracle Cloud Infrastructure AI Foundations Associate</li>
+    <li>Watsonx Code Assistant Practitioner Advanced</li>
     <li>MCP (Microsoft Certified Professional)</li>
     <li>Cybersecurity Awareness Professional</li>
     <li>Scrum Master</li>
