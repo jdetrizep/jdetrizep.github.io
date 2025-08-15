@@ -169,6 +169,10 @@ WHERE ID IN (SELECT ID FROM candidatos);
 - **Evita funciones sobre columnas** en la correlación (ej. `UPPER(s.ID) = t.ID`), suelen invalidar el uso de índices.  
 - **Reduce el set** con filtros selectivos en la subconsulta: mientras más pronto discrimines, mejor.
 
+<figure>
+<img src="./Analisis_Delete_Where_Exists.png" alt="Análisis de DELETE WHERE EXISTS en Db2 for i">
+<figcaption>Fig 1. Análisis de DELETE WHERE EXISTS en Db2 for i.</figcaption>
+</figure>
 
 ## 6. Ejemplos prácticos
 
