@@ -2,10 +2,10 @@
 title: Jorge De Trinidad Zepeda
 permalink: /about/
 layout: pageAbout
-excerpt: Hola soy Jorge De Trinidad Zepeda, actualmente tengo el rol de Expert Coach dando seguimiento a los consultores de Novacomp que dan servicios a diversos clientes. Dentro de mi rol me dedico a dar capacitación, mentoría y seguimiento a los consultores que trabajan en Novacomp. 
+excerpt: Hola soy Jorge De Trinidad Zepeda, actualmente tengo el rol de Senior Solution Architect, transformando requerimientos funcionales en arquitecturas técnicas sólidas y alineadas a los objetivos estratégicos del negocio. 
 comments: false
 ---
-Soy un **Expert Coach** con más de 15 años de experiencia en desarrollo de sistemas bancarios y en la implementación de prácticas de DevOps, CI/CD y automatización. Mi especialidad abarca diversas tecnologías, incluyendo **Java, C#, ASP.NET Core, Azure, y sistemas IBM i (RPGLE, SQLRPGLE, Full Free)**. También tengo experiencia en desarrollo móvil con **Kotlin (Android) y Swift/Objective-C (iOS)**.
+Soy un **Senior Solution Architect** con más de 15 años de experiencia en desarrollo de sistemas bancarios y en la implementación de prácticas de DevOps, CI/CD y automatización. Mi especialidad abarca diversas tecnologías, incluyendo **Java, C#, ASP.NET Core, Azure, y sistemas IBM i (RPGLE, SQLRPGLE, Full Free)**. También tengo experiencia en desarrollo móvil con **Kotlin (Android) y Swift/Objective-C (iOS)**.
 
 Además de mi trabajo en el desarrollo de software, soy **profesor y mentor** de nuevos programadores, ayudándolos a fortalecer sus habilidades en Java, AS400 y bases de datos DB2. Me apasiona la enseñanza y la adopción de buenas prácticas de programación, estándares modernos y el uso responsable de la inteligencia artificial en el desarrollo de software.
 
@@ -13,9 +13,12 @@ Soy **IBM Influencer 2025**, **IBM Advocate 2025** e **IBM Contributor 2025**, l
 <ul>
     <li>DevOps Engineer (CM-DOTP)</li>
     <li>IBM i Ready</li>
+    <li>IBM i Development Foundations</li>
     <li>Azure AI Fundamentals</li>
     <li>IBM Artificial Intelligence Fundamentals</li>
     <li>Oracle Cloud Infrastructure AI Foundations Associate</li>
+    <li>watsonx.ai Data Science and MLOps Practitioner Advanced</li>
+    <li>Data Science and AI: Del Concepto a Desarrollo de Aplicaciones</li>
     <li>Microsoft Certification GitHub Copilot</li>
     <li>Watsonx Code Assistant Practitioner Advanced</li>
     <li>MCP (Microsoft Certified Professional)</li>
