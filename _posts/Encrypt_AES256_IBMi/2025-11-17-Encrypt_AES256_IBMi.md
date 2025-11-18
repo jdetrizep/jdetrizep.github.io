@@ -27,7 +27,7 @@ Proteger esa información ya no es “deseable”: es obligatorio, tanto por **r
 
 Dentro de este contexto, Db2 for i nos ofrece un par de funciones muy potentes:
 
-- `ENCRYPT_AES256` → cifra datos con **AES de 256 bits**.
+- `ENCRYPT_AES256` → cifra datos con **AES de 256 bits**. 
 - `DECRYPT_CHAR` → permite recuperar el valor en claro, usando la misma contraseña o la **ENCRYPTION PASSWORD** de sesión.
 
 Con ellas puedes construir esquemas de seguridad robustos **sin salir de SQL** y sin depender de librerías externas en RPG, Java o .NET.
@@ -61,7 +61,7 @@ El tipo de resultado depende del tipo original del dato:
 | CHAR / VARCHAR / GRAPHIC / VARGRAPHIC | VARCHAR FOR BIT DATA  |
 | BLOB / CLOB / DBCLOB                  | BLOB                  |
 
-El valor cifrado siempre es **más largo** que el original por padding y overhead.
+El valor cifrado siempre es **más largo** que el original por padding y overhead. Considera esto al definir las columnas en las que almacenarás datos cifrados.
 
 
 ## 2. ¿Qué hace exactamente DECRYPT_CHAR?
