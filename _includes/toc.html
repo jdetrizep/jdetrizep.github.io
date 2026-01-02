@@ -1,0 +1,293 @@
+{% comment %}
+  Tabla de Contenidos Automática
+  Genera un TOC basado en los encabezados H2 y H3 del contenido
+{% endcomment %}
+
+<nav class="table-of-contents" id="toc">
+  <div class="toc-header">
+    <h2>📑 Contenido</h2>
+    <button id="toc-toggle" aria-label="Colapsar/Expandir tabla de contenidos">−</button>
+  </div>
+  <div class="toc-content" id="toc-content">
+    <!-- El contenido se genera dinámicamente con JavaScript -->
+  </div>
+</nav>
+
+<style>
+.table-of-contents {
+  background: var(--light, #f8f9fa);
+  border: 1px solid var(--smoke, #e0e0e0);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin: 2rem 0;
+  position: sticky;
+  top: 20px;
+  max-height: calc(100vh - 100px);
+  overflow-y: auto;
+}
+
+.toc-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid var(--smoke, #e0e0e0);
+}
+
+.toc-header h2 {
+  margin: 0;
+  font-size: 1.25rem;
+  color: var(--text-base-color, #333);
+}
+
+#toc-toggle {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  color: var(--gray, #666);
+  transition: transform 0.3s;
+}
+
+#toc-toggle:hover {
+  color: var(--text-link-blue, #003fff);
+}
+
+#toc-toggle.collapsed {
+  transform: rotate(180deg);
+}
+
+.toc-content {
+  transition: max-height 0.3s ease-out, opacity 0.3s;
+  overflow: hidden;
+}
+
+.toc-content.collapsed {
+  max-height: 0 !important;
+  opacity: 0;
+}
+
+.toc-content ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.toc-content > ul {
+  margin-left: 0;
+}
+
+.toc-content li {
+  margin: 0.5rem 0;
+}
+
+.toc-content a {
+  color: var(--text-base-color, #333);
+  text-decoration: none;
+  display: block;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  transition: all 0.2s;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.toc-content a:hover {
+  background: var(--smoke, #e0e0e0);
+  color: var(--text-link-blue, #003fff);
+  padding-left: 1rem;
+}
+
+.toc-content a.active {
+  background: var(--text-link-blue, #003fff);
+  color: white;
+  font-weight: 500;
+}
+
+.toc-content ul ul {
+  margin-left: 1.25rem;
+  margin-top: 0.25rem;
+}
+
+.toc-content ul ul a {
+  font-size: 0.875rem;
+  color: var(--gray, #666);
+}
+
+/* Indicador de progreso de lectura */
+.reading-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 3px;
+  background: linear-gradient(to right, var(--text-link-blue, #003fff), #00d4ff);
+  z-index: 1000;
+  transition: width 0.1s ease-out;
+}
+
+/* Dark mode */
+[data-theme="dark"] .table-of-contents {
+  background: var(--dark-light, #1b1d25);
+  border-color: var(--dark-smoke, #4a4d56);
+}
+
+[data-theme="dark"] .toc-header h2 {
+  color: var(--dark-white, #eaeaea);
+}
+
+[data-theme="dark"] .toc-header {
+  border-bottom-color: var(--dark-smoke, #4a4d56);
+}
+
+[data-theme="dark"] .toc-content a {
+  color: var(--dark-text-base-color, #c7bebe);
+}
+
+[data-theme="dark"] .toc-content a:hover {
+  background: var(--dark-smoke, #4a4d56);
+  color: var(--dark-text-link-blue, #ff5277);
+}
+
+[data-theme="dark"] .toc-content a.active {
+  background: var(--dark-text-link-blue, #ff5277);
+  color: var(--dark-white, #eaeaea);
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+  .table-of-contents {
+    position: relative;
+    top: 0;
+    max-height: none;
+  }
+  
+  .toc-content.collapsed {
+    display: none;
+  }
+}
+</style>
+
+<div class="reading-progress" id="reading-progress"></div>
+
+<script>
+(function() {
+  // Generar TOC
+  function generateTOC() {
+    const content = document.querySelector('.page-content');
+    if (!content) return;
+    
+    const headings = content.querySelectorAll('h2, h3');
+    if (headings.length === 0) {
+      document.getElementById('toc').style.display = 'none';
+      return;
+    }
+    
+    const tocContent = document.getElementById('toc-content');
+    const ul = document.createElement('ul');
+    let currentH2 = null;
+    
+    headings.forEach((heading, index) => {
+      // Agregar ID si no tiene
+      if (!heading.id) {
+        heading.id = 'heading-' + index;
+      }
+      
+      const li = document.createElement('li');
+      const a = document.createElement('a');
+      a.href = '#' + heading.id;
+      a.textContent = heading.textContent.replace(/^#+\s*/, '');
+      a.addEventListener('click', function(e) {
+        e.preventDefault();
+        heading.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        history.pushState(null, null, '#' + heading.id);
+      });
+      
+      li.appendChild(a);
+      
+      if (heading.tagName === 'H2') {
+        ul.appendChild(li);
+        currentH2 = li;
+      } else if (heading.tagName === 'H3' && currentH2) {
+        let subUl = currentH2.querySelector('ul');
+        if (!subUl) {
+          subUl = document.createElement('ul');
+          currentH2.appendChild(subUl);
+        }
+        subUl.appendChild(li);
+      }
+    });
+    
+    tocContent.appendChild(ul);
+  }
+  
+  // Toggle TOC
+  document.getElementById('toc-toggle').addEventListener('click', function() {
+    const content = document.getElementById('toc-content');
+    const button = this;
+    
+    content.classList.toggle('collapsed');
+    button.classList.toggle('collapsed');
+    button.textContent = content.classList.contains('collapsed') ? '+' : '−';
+  });
+  
+  // Highlight active section
+  function highlightActiveSection() {
+    const headings = document.querySelectorAll('.page-content h2, .page-content h3');
+    const tocLinks = document.querySelectorAll('.toc-content a');
+    
+    let activeHeading = null;
+    const scrollPosition = window.scrollY + 100;
+    
+    headings.forEach(heading => {
+      if (heading.offsetTop <= scrollPosition) {
+        activeHeading = heading;
+      }
+    });
+    
+    tocLinks.forEach(link => {
+      link.classList.remove('active');
+      if (activeHeading && link.getAttribute('href') === '#' + activeHeading.id) {
+        link.classList.add('active');
+      }
+    });
+  }
+  
+  // Reading progress
+  function updateReadingProgress() {
+    const content = document.querySelector('.page-content');
+    if (!content) return;
+    
+    const windowHeight = window.innerHeight;
+    const documentHeight = content.offsetHeight;
+    const scrollTop = window.scrollY;
+    const docTop = content.offsetTop;
+    
+    const scrolled = scrollTop - docTop;
+    const progress = (scrolled / (documentHeight - windowHeight)) * 100;
+    
+    document.getElementById('reading-progress').style.width = Math.min(Math.max(progress, 0), 100) + '%';
+  }
+  
+  // Inicializar
+  document.addEventListener('DOMContentLoaded', function() {
+    generateTOC();
+    highlightActiveSection();
+    updateReadingProgress();
+  });
+  
+  // Event listeners
+  let scrollTimeout;
+  window.addEventListener('scroll', function() {
+    clearTimeout(scrollTimeout);
+    scrollTimeout = setTimeout(function() {
+      highlightActiveSection();
+      updateReadingProgress();
+    }, 50);
+  });
+  
+  window.addEventListener('resize', updateReadingProgress);
+})();
+</script>

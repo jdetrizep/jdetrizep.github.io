@@ -6,7 +6,15 @@
   url: /archive/
   external: false
 
+- title: Tags
+  url: /tags/
+  external: false
+
+- title: Búsqueda
+  url: /search/
+  external: false
+
 - title: Acerca de
   url: /about/
-  external: false 
+  external: false
   

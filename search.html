@@ -1,0 +1,312 @@
+---
+layout: page
+title: Búsqueda
+permalink: /search/
+---
+
+<div class="search-container">
+  <div class="search-box">
+    <input type="text" id="search-input" placeholder="Buscar en el blog..." autocomplete="off">
+    <button id="search-button" aria-label="Buscar">🔍</button>
+  </div>
+  
+  <div id="search-results"></div>
+  <div id="search-info" style="display: none;"></div>
+</div>
+
+<style>
+.search-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.search-box {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+#search-input {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border: 2px solid var(--gray, #ccc);
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+#search-input:focus {
+  border-color: var(--text-link-blue, #003fff);
+}
+
+#search-button {
+  padding: 0.75rem 1.5rem;
+  font-size: 1.2rem;
+  background: var(--text-link-blue, #003fff);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: opacity 0.3s;
+}
+
+#search-button:hover {
+  opacity: 0.8;
+}
+
+#search-results {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.search-result {
+  padding: 1.5rem;
+  border: 1px solid var(--smoke, #ddd);
+  border-radius: 8px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.search-result:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.search-result h3 {
+  margin: 0 0 0.5rem 0;
+}
+
+.search-result h3 a {
+  color: var(--text-link-blue, #003fff);
+  text-decoration: none;
+}
+
+.search-result h3 a:hover {
+  text-decoration: underline;
+}
+
+.search-result-meta {
+  font-size: 0.875rem;
+  color: var(--gray, #666);
+  margin-bottom: 0.5rem;
+}
+
+.search-result-excerpt {
+  color: var(--text-base-color, #333);
+  line-height: 1.6;
+}
+
+.search-result-tags {
+  margin-top: 0.75rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.search-result-tag {
+  padding: 0.25rem 0.75rem;
+  background: var(--light, #f5f5f5);
+  border-radius: 4px;
+  font-size: 0.75rem;
+  color: var(--gray, #666);
+}
+
+#search-info {
+  padding: 1rem;
+  background: var(--light, #f5f5f5);
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.no-results {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: var(--gray, #666);
+}
+
+/* Dark mode support */
+[data-theme="dark"] #search-input {
+  background: var(--dark-light, #1b1d25);
+  color: var(--dark-white, #eaeaea);
+  border-color: var(--dark-smoke, #4a4d56);
+}
+
+[data-theme="dark"] .search-result {
+  background: var(--dark-light, #1b1d25);
+  border-color: var(--dark-smoke, #4a4d56);
+}
+
+[data-theme="dark"] .search-result-tag {
+  background: var(--dark-smoke, #4a4d56);
+  color: var(--dark-white, #eaeaea);
+}
+
+[data-theme="dark"] #search-info {
+  background: var(--dark-light, #1b1d25);
+}
+</style>
+
+<script src="https://unpkg.com/lunr/lunr.js"></script>
+<script>
+(function() {
+  let searchIndex;
+  let searchData;
+  
+  // Cargar datos de búsqueda
+  fetch('/search.json')
+    .then(response => response.json())
+    .then(data => {
+      searchData = data;
+      
+      // Crear índice de Lunr
+      searchIndex = lunr(function() {
+        this.ref('id');
+        this.field('title', { boost: 10 });
+        this.field('tags', { boost: 5 });
+        this.field('description', { boost: 3 });
+        this.field('content');
+        
+        data.forEach(doc => {
+          this.add(doc);
+        });
+      });
+      
+      // Buscar si hay query en URL
+      const urlParams = new URLSearchParams(window.location.search);
+      const query = urlParams.get('q');
+      if (query) {
+        document.getElementById('search-input').value = query;
+        performSearch(query);
+      }
+    })
+    .catch(error => {
+      console.error('Error cargando datos de búsqueda:', error);
+      showError('Error al cargar el índice de búsqueda');
+    });
+  
+  // Event listeners
+  document.getElementById('search-button').addEventListener('click', function() {
+    const query = document.getElementById('search-input').value;
+    performSearch(query);
+  });
+  
+  document.getElementById('search-input').addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+      const query = this.value;
+      performSearch(query);
+    }
+  });
+  
+  // Función de búsqueda
+  function performSearch(query) {
+    const resultsDiv = document.getElementById('search-results');
+    const infoDiv = document.getElementById('search-info');
+    
+    if (!query || query.trim() === '') {
+      resultsDiv.innerHTML = '';
+      infoDiv.style.display = 'none';
+      return;
+    }
+    
+    if (!searchIndex) {
+      showError('El índice de búsqueda aún se está cargando...');
+      return;
+    }
+    
+    try {
+      const results = searchIndex.search(query);
+      displayResults(results, query);
+    } catch (error) {
+      console.error('Error en búsqueda:', error);
+      showError('Error al realizar la búsqueda');
+    }
+  }
+  
+  // Mostrar resultados
+  function displayResults(results, query) {
+    const resultsDiv = document.getElementById('search-results');
+    const infoDiv = document.getElementById('search-info');
+    
+    infoDiv.style.display = 'block';
+    
+    if (results.length === 0) {
+      infoDiv.innerHTML = `No se encontraron resultados para "<strong>${escapeHtml(query)}</strong>"`;
+      resultsDiv.innerHTML = '<div class="no-results">💭 Intenta con otros términos de búsqueda</div>';
+      return;
+    }
+    
+    infoDiv.innerHTML = `Se encontraron <strong>${results.length}</strong> resultado${results.length > 1 ? 's' : ''} para "<strong>${escapeHtml(query)}</strong>"`;
+    
+    const html = results.map(result => {
+      const post = searchData.find(p => p.id === result.ref);
+      if (!post) return '';
+      
+      const excerpt = getExcerpt(post.content, query);
+      const tags = post.tags ? post.tags.split(', ').filter(t => t) : [];
+      
+      return `
+        <div class="search-result">
+          <h3><a href="${post.url}">${post.title}</a></h3>
+          <div class="search-result-meta">
+            📅 ${post.date}
+          </div>
+          <div class="search-result-excerpt">${excerpt}</div>
+          ${tags.length > 0 ? `
+            <div class="search-result-tags">
+              ${tags.map(tag => `<span class="search-result-tag">${tag}</span>`).join('')}
+            </div>
+          ` : ''}
+        </div>
+      `;
+    }).join('');
+    
+    resultsDiv.innerHTML = html;
+  }
+  
+  // Obtener extracto con contexto
+  function getExcerpt(content, query) {
+    const maxLength = 200;
+    const lowerContent = content.toLowerCase();
+    const lowerQuery = query.toLowerCase();
+    const index = lowerContent.indexOf(lowerQuery);
+    
+    if (index === -1) {
+      return content.substring(0, maxLength) + '...';
+    }
+    
+    const start = Math.max(0, index - 50);
+    const end = Math.min(content.length, index + query.length + 150);
+    let excerpt = content.substring(start, end);
+    
+    if (start > 0) excerpt = '...' + excerpt;
+    if (end < content.length) excerpt = excerpt + '...';
+    
+    // Resaltar término de búsqueda
+    const regex = new RegExp(`(${escapeRegex(query)})`, 'gi');
+    excerpt = excerpt.replace(regex, '<mark>$1</mark>');
+    
+    return excerpt;
+  }
+  
+  // Utilidades
+  function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+  }
+  
+  function escapeRegex(text) {
+    return text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  }
+  
+  function showError(message) {
+    const infoDiv = document.getElementById('search-info');
+    infoDiv.style.display = 'block';
+    infoDiv.innerHTML = `⚠️ ${message}`;
+    infoDiv.style.background = '#fff3cd';
+    infoDiv.style.color = '#856404';
+  }
+})();
+</script>
