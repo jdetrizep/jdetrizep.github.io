@@ -1,8 +1,8 @@
 ---
 layout: post
 title: AI-First el futuro del desarrollo de software
-date: 2025-01-06 08:00
-modified: 2025-01-06 08:00
+date: 2026-01-02 08:00
+modified: 2026-01-02 08:00
 description: AI-First - El futuro del desarrollo de software ya comenzó
 tag:
   - AI-First
