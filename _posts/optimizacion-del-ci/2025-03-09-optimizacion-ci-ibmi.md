@@ -12,7 +12,7 @@ tag:
   - Azure DevOps
   - GitHub Copilot
   - Hard Code Check
-image: /Optimización-del-CI-en-IBMi-con-Full-Free/DevOps_RPG.png
+image: /optimizacion-del-ci/optimizacion_ci.png
 ---
 
 # Optimización del CI en IBM i con Full Free: Implementación Continua con IA y DevOps

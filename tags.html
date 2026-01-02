@@ -41,15 +41,17 @@ permalink: /tags/
             <article class="post-card">
               {% if post.image %}
                 <div class="post-card-image">
-                  <a href="{{ post.url }}">
-                    <img src="{{ post.image }}" alt="{{ post.title }}" loading="lazy">
+                  <a href="{{ site.baseurl }}{{ post.url }}">
+                    {% assign image_path = post.image | split: '/' | last %}
+                    {% assign post_dir = post.url | remove: '.html' %}
+                    <img src="{{ post_dir }}/{{ image_path }}" alt="{{ post.title }}" loading="lazy" class="post-image-fallback">
                   </a>
                 </div>
               {% endif %}
               
               <div class="post-card-content">
                 <h3 class="post-card-title">
-                  <a href="{{ post.url }}">{{ post.title }}</a>
+                  <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
                 </h3>
                 
                 <div class="post-card-meta">
@@ -141,8 +143,8 @@ permalink: /tags/
 }
 
 .tag-bubble:hover .tag-count {
-  background: rgba(255, 255, 255, 0.3);
-  color: white;
+  background: rgba(255, 255, 255, 0.95);
+  color: var(--text-link-blue, #003fff);
 }
 
 /* Tags List */
@@ -332,9 +334,24 @@ permalink: /tags/
     padding: 1rem;
   }
 }
+
+/* Image fallback handling */
+.post-card-image img.post-image-fallback.error {
+  display: none;
+}
 </style>
 
 <script>
+// Handle image loading errors
+document.addEventListener('DOMContentLoaded', function() {
+  const images = document.querySelectorAll('.post-image-fallback');
+  images.forEach(img => {
+    img.addEventListener('error', function() {
+      this.classList.add('error');
+    });
+  });
+});
+
 // Smooth scroll to tag section
 document.querySelectorAll('.tag-bubble').forEach(link => {
   link.addEventListener('click', function(e) {
