@@ -155,7 +155,8 @@ permalink: /search/
   let searchData;
   
   // Cargar datos de búsqueda
-  const searchJsonUrl = '{{ site.baseurl }}/search.json?v=' + Date.now();
+  const searchJsonUrl = '{{ "/search.json" | relative_url }}?v=' + Date.now();
+  console.log('Cargando búsqueda desde:', searchJsonUrl);
   fetch(searchJsonUrl)
     .then(response => {
       if (!response.ok) {
