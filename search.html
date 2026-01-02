@@ -155,12 +155,22 @@ permalink: /search/
   let searchData;
   
   // Cargar datos de búsqueda
-  fetch('{{ site.baseurl }}/search.json')
+  const searchJsonUrl = '{{ site.baseurl }}/search.json?v=' + Date.now();
+  fetch(searchJsonUrl)
     .then(response => {
       if (!response.ok) {
-        throw new Error('No se pudo cargar search.json');
+        throw new Error('HTTP ' + response.status + ': No se pudo cargar search.json');
       }
-      return response.json();
+      return response.text();
+    })
+    .then(text => {
+      try {
+        return JSON.parse(text);
+      } catch (e) {
+        console.error('Error parseando JSON:', e);
+        console.error('Contenido recibido:', text.substring(0, 500));
+        throw new Error('JSON inválido: ' + e.message);
+      }
     })
     .then(data => {
       searchData = data;
