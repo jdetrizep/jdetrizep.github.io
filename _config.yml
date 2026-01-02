@@ -2,7 +2,7 @@
 title: Blog jdetrizep # site title
 description: >- # site description
   Este es un blog de tecnología, orientado para amantes de desarrollo y para compartir conocimiento adquiridos.
-lang: en-ES # default lang
+lang: es-CR # default lang (corregido de en-ES a es-CR)
 timezone: America/Costa_Rica # set your timezone
 image: assets/img/jdetri_logo_binary.jpg # Imagen para compartir en redes sociales
 repo: https://github.com/jdetrizep # site repo [optional]
@@ -29,7 +29,7 @@ author:
   logosite: /assets/favicons/jdetri_logo_180x180.png # change with your own logo
 
 # URL settings
-url: "" #
+url: "https://jdetrizep.github.io" # Tu URL de GitHub Pages (actualizar cuando tengas dominio propio)
 baseurl: "" # leave it blank if not wish
 permalink: /:title/
 google_analytics: G-KQCBK0PDYH # leave it blank if not wish
@@ -76,6 +76,7 @@ sass:
 include:
   - _redirects
   - .htaccess
+  - robots.txt
 
 exclude:
   - CNAME

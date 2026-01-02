@@ -1,8 +1,8 @@
 ---
 layout: post
 title: AI-First el futuro del desarrollo de software
-date: 2026-01-01 08:00
-modified: 2026-01-01 08:00
+date: 2025-01-06 08:00
+modified: 2025-01-06 08:00
 description: AI-First - El futuro del desarrollo de software ya comenzó
 tag:
   - AI-First
@@ -67,7 +67,7 @@ AI-First obliga a replantear preguntas estructurales:
 En ese sentido, AI-First no es una práctica de productividad, **es una disciplina de ingeniería**.
 
 <figure>
-<img src="./AI_First_Infografo.png" alt="Infografía de AI-First" />
+<img src="./AI_First_Infografo.png" alt="Diagrama conceptual mostrando la transición del desarrollo tradicional al enfoque AI-First, destacando la integración de la inteligencia artificial como coprocesador cognitivo en el ciclo de desarrollo de software" loading="lazy" />
 <figcaption>Fig 1. Infografía de AI-First.</figcaption>
 </figure>
 
@@ -150,7 +150,7 @@ La diferencia no es técnica: es epistemológica.
 - Pensar AI-First es replantear cómo llegamos a esos resultados, qué criterios usamos y cómo gobernamos la intervención de la IA.
 
 <figure>
-<img src="./AI_First_Infografo2.png" alt="Infografía de la evolución de AI por medio de la AI-First" />
+<img src="./AI_First_Infografo2.png" alt="Visualización de la evolución desde IA como herramienta reactiva hacia IA como capa cognitiva estructural, mostrando la transformación del pensamiento técnico en el desarrollo de software" loading="lazy" />
 <figcaption>Fig 2. Evolución de la AI por medio de la AI-First.</figcaption>
 </figure>
 
@@ -264,7 +264,7 @@ En otras palabras:
 > **AI-First transforma el SDLC de un conjunto de pasos encadenados en una red de decisiones interdependientes y co-razonadas.**
 
 <figure>
-<img src="./AI_First_Infografo3.png" alt="Infografía de la AI en el centro del SDLC" />
+<img src="./AI_First_Infografo3.png" alt="Diagrama del ciclo de vida del desarrollo de software (SDLC) con la inteligencia artificial en el centro, mostrando cómo AI-First transforma cada fase desde requerimientos hasta operación y mantenimiento" loading="lazy" />
 <figcaption>Fig 3. La AI en el centro del SDLC.</figcaption>
 </figure>
 
@@ -325,7 +325,7 @@ Técnicamente, un asistente de código puede considerarse AI-First si cumple al 
 No todos los asistentes encarnan AI-First. Muchos son potentes desde el punto de vista de productividad, pero limitados cognitivamente: operan sobre prompts, no sobre contexto. La verdadera revolución AI-First no es que la IA genere código más rápido —eso ya es commodity—, sino que puede formar parte activa de la construcción del pensamiento técnico detrás de una solución. Y esto no se logra generando código **Se logra generando criterios**.
 
 <figure>
-<img src="./AI_First_Infografo4.png" alt="Infografía de los asistentes de código con enfoque AI-First" />
+<img src="./AI_First_Infografo4.png" alt="Comparativa visual de asistentes de código AI-First: Project Bob, GitHub Copilot Agents y Kiro, destacando sus capacidades de co-razonamiento, comprensión contextual y autonomía en el desarrollo de software" loading="lazy" />
 <figcaption>Fig 4. Asistentes de código con enfoque AI-First.</figcaption>
 </figure>
 
@@ -400,7 +400,7 @@ La respuesta no está en listar herramientas, sino en **repensar el proceso de i
 - Más supervisión estratégica.
 
 <figure>
-<img src="./AI_First_Infografo5.png" alt="Infografía del futuro del desarrollo con asistentes de código AI-First" />
+<img src="./AI_First_Infografo5.png" alt="Proyección del futuro del desarrollo de software con AI-First: agentes especializados, memoria de proyecto persistente, co-gobernanza técnica y la evolución del rol del desarrollador hacia pensador estratégico" loading="lazy" />
 <figcaption>Fig 5. Futuro del desarrollo con asistentes de código AI-First.</figcaption>
 </figure>
 

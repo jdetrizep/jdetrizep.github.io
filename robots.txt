@@ -1,0 +1,14 @@
+User-agent: *
+Allow: /
+
+# Disallow admin and private directories
+Disallow: /assets/css/
+Disallow: /assets/js/
+Disallow: /_site/
+Disallow: /.git/
+
+# Sitemap location
+Sitemap: {{ site.url }}/sitemap.xml
+
+# Crawl-delay for respectful crawling
+Crawl-delay: 1

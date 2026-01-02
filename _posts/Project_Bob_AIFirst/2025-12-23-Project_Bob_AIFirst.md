@@ -28,7 +28,7 @@ No fue una prueba de laboratorio ni una demo controlada. Decidí usar BOB en esc
 La pregunta no era si BOB podía “ayudar”, sino **qué tan profundo podía integrarse en el ciclo de vida del desarrollo** y si realmente representaba un enfoque **AI-First** más allá del marketing.
 
 <figure>
-<img src="./Portada_Project_Bob2.png" alt="Representación de Project BOB en acción" />
+<img src="./Portada_Project_Bob2.png" alt="Ilustración de Project BOB, el asistente de IA de IBM, trabajando en conjunto con un desarrollador en tareas de modernización de código Java y análisis de arquitectura de software" loading="lazy" />
 <figcaption>Fig 1. Project BOB en acción.</figcaption>
 </figure>
 
@@ -46,7 +46,7 @@ Llegué con expectativas altas. Había visto a BOB en acción en **IBM TechXchan
 La fortaleza más clara que he identificado en Project BOB es su **autonomía para ejecutar tareas completas**. BOB no se limita a responder prompts aislados; entiende una **task** como una unidad funcional que debe resolverse de principio a fin.
 
 <figure>
-<img src="./Bob_Tareas.png" alt="Project Bob manejo de Task" />
+<img src="./Bob_Tareas.png" alt="Captura de pantalla mostrando la interfaz de Project BOB gestionando tareas completas de forma autónoma, desde análisis de contexto hasta ejecución de comandos y resolución de dependencias en un proyecto Java" loading="lazy" />
 <figcaption>Fig 2. Project BOB manejo de Task.</figcaption>
 </figure>
 
@@ -83,7 +83,7 @@ En el día a día, esto fomenta naturalmente el uso de **micro-commits**:
 La calidad del código mejora no por imposición de procesos, sino porque el feedback llega en el momento correcto.
 
 <figure>
-<img src="./Bob_Commit.png" alt="Project Bob manejo de Commits" />
+<img src="./Bob_Commit.png" alt="Demostración de Project BOB realizando revisión automática de commits en Git, analizando cambios de código, detectando errores potenciales y proporcionando feedback inmediato para integración continua" loading="lazy" />
 <figcaption>Fig 3. Project BOB manejo de Commits.</figcaption>
 </figure>
 
@@ -113,7 +113,7 @@ Posteriormente:
 - y comenzó a conectar decisiones técnicas sin que yo tuviera que guiarlo paso a paso.
 
 <figure>
-<img src="./Bob_Modernizacion.png" alt="Project Bob manejo de Modernización" />
+<img src="./Bob_Modernizacion.png" alt="Ejemplo de Project BOB analizando y modernizando código Java de versión 17 a 21, mostrando análisis de dependencias en POM, actualización de bibliotecas y propuestas de mejoras arquitectónicas" loading="lazy" />
 <figcaption>Fig 4. Project BOB manejo de Modernización.</figcaption>
 </figure>
 

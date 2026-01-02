@@ -1,0 +1,18 @@
+{% comment %}
+  Uso: {% include picture.html src="ruta/imagen.png" alt="Descripción" %}
+  Genera un elemento <picture> con WebP y fallback PNG
+{% endcomment %}
+
+{% assign image_path = include.src %}
+{% assign webp_path = image_path | replace: '.png', '.webp' | replace: '.jpg', '.webp' | replace: '.jpeg', '.webp' %}
+{% assign alt_text = include.alt | default: "" %}
+{% assign loading = include.loading | default: "lazy" %}
+{% assign class = include.class | default: "" %}
+
+<picture>
+  <source srcset="{{ webp_path }}" type="image/webp">
+  <img src="{{ image_path }}" 
+       alt="{{ alt_text }}" 
+       loading="{{ loading }}"
+       {% if class != "" %}class="{{ class }}"{% endif %}>
+</picture>
