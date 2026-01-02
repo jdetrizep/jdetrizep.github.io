@@ -1,0 +1,31 @@
+<!-- Sistema de Calificación de Estrellas -->
+<div class="post-rating-container">
+  <div class="rating-header">
+    <h3>¿Te gustó este artículo?</h3>
+    <p>Califica de 1 a 5 estrellas</p>
+  </div>
+  
+  <div class="rating-widget">
+    <div class="stars-container" data-post-id="{{ page.id | slugify }}">
+      <span class="star" data-value="1">★</span>
+      <span class="star" data-value="2">★</span>
+      <span class="star" data-value="3">★</span>
+      <span class="star" data-value="4">★</span>
+      <span class="star" data-value="5">★</span>
+    </div>
+    
+    <div class="rating-info">
+      <div class="current-rating">
+        <span class="rating-value">0.0</span>
+        <span class="rating-stars">☆☆☆☆☆</span>
+      </div>
+      <div class="rating-count">
+        <span class="count">0</span> calificaciones
+      </div>
+    </div>
+    
+    <div class="rating-message" style="display: none;">
+      ¡Gracias por tu calificación!
+    </div>
+  </div>
+</div>

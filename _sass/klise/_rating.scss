@@ -1,0 +1,215 @@
+// Sistema de Calificación de Estrellas (Compacto)
+.post-rating-container {
+  margin: 2rem 0;
+  padding: 1.25rem;
+  background: var(--bg-color, #f8f9fa);
+  border-radius: 8px;
+  border: 1px solid var(--border-color, #e9ecef);
+  text-align: center;
+  transition: all 0.3s ease;
+
+  .rating-header {
+    margin-bottom: 1rem;
+
+    h3 {
+      margin: 0 0 0.25rem 0;
+      font-size: 1.1rem;
+      color: var(--text-color, #333);
+      font-weight: 600;
+    }
+
+    p {
+      margin: 0;
+      color: var(--gray, #666);
+      font-size: 0.8rem;
+    }
+  }
+
+  .rating-widget {
+    .stars-container {
+      display: flex;
+      justify-content: center;
+      gap: 0.3rem;
+      margin-bottom: 1rem;
+      font-size: 2rem;
+      cursor: pointer;
+      user-select: none;
+
+      .star {
+        color: #ddd;
+        transition: all 0.2s ease;
+        position: relative;
+
+        &:hover,
+        &.hover {
+          color: #ffd700;
+          transform: scale(1.15);
+        }
+
+        &.active {
+          color: #ffd700;
+          animation: starPulse 0.3s ease;
+        }
+
+        &.rated {
+          color: #ffd700;
+        }
+      }
+    }
+
+    .rating-info {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1.5rem;
+      margin-bottom: 0.75rem;
+      flex-wrap: wrap;
+
+      .current-rating {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.25rem;
+
+        .rating-value {
+          font-size: 1.5rem;
+          font-weight: bold;
+          color: var(--link-color, #007bff);
+        }
+
+        .rating-stars {
+          font-size: 0.95rem;
+          color: #ffd700;
+          letter-spacing: 0.15rem;
+        }
+      }
+
+      .rating-count {
+        font-size: 0.85rem;
+        color: var(--gray, #666);
+
+        .count {
+          font-weight: bold;
+          color: var(--text-color, #333);
+        }
+      }
+    }
+
+    .rating-message {
+      padding: 0.65rem;
+      background: #d4edda;
+      color: #155724;
+      border-radius: 6px;
+      font-weight: 500;
+      font-size: 0.85rem;
+      animation: fadeIn 0.5s ease;
+    }
+  }
+}
+
+// Animaciones
+@keyframes starPulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.3);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Modo oscuro
+[data-theme="dark"] {
+  .post-rating-container {
+    background: var(--dark-bg, #1a1a1a);
+    border-color: var(--dark-border, #333);
+
+    .rating-header {
+      h3 {
+        color: var(--dark-text, #e0e0e0);
+      }
+
+      p {
+        color: var(--dark-gray, #999);
+      }
+    }
+
+    .rating-info {
+      .current-rating {
+        .rating-value {
+          color: var(--dark-link, #4dabf7);
+        }
+      }
+
+      .rating-count {
+        color: var(--dark-gray, #999);
+
+        .count {
+          color: var(--dark-text, #e0e0e0);
+        }
+      }
+    }
+
+    .rating-widget {
+      .rating-message {
+        background: #1e4620;
+        color: #a3d9a5;
+      }
+    }
+  }
+}
+
+// Responsive
+@media (max-width: 768px) {
+  .post-rating-container {
+    padding: 1rem;
+
+    .rating-header {
+      h3 {
+        font-size: 1rem;
+      }
+
+      p {
+        font-size: 0.75rem;
+      }
+    }
+
+    .rating-widget {
+      .stars-container {
+        font-size: 1.75rem;
+        gap: 0.25rem;
+      }
+
+      .rating-info {
+        gap: 1rem;
+
+        .current-rating {
+          .rating-value {
+            font-size: 1.25rem;
+          }
+
+          .rating-stars {
+            font-size: 0.85rem;
+          }
+        }
+
+        .rating-count {
+          font-size: 0.8rem;
+        }
+      }
+    }
+  }
+}
