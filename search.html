@@ -155,8 +155,13 @@ permalink: /search/
   let searchData;
   
   // Cargar datos de búsqueda
-  fetch('/search.json')
-    .then(response => response.json())
+  fetch('{{ site.baseurl }}/search.json')
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('No se pudo cargar search.json');
+      }
+      return response.json();
+    })
     .then(data => {
       searchData = data;
       
