@@ -5,13 +5,15 @@ permalink: /search/
 ---
 
 <div class="search-container">
-  <div class="search-box">
-    <input type="text" id="search-input" placeholder="Buscar en el blog..." autocomplete="off">
-    <button id="search-button" aria-label="Buscar">🔍</button>
+  <div class="search-notice">
+    <h2>🔍 Búsqueda Temporalmente Deshabilitada</h2>
+    <p>Estamos trabajando en mejorar la funcionalidad de búsqueda.</p>
+    <p>Mientras tanto, puedes explorar el contenido a través de:</p>
+    <ul>
+      <li><a href="/archive/">📚 Archivo de Posts</a></li>
+      <li><a href="/tags/">🏷️ Tags</a></li>
+    </ul>
   </div>
-  
-  <div id="search-results"></div>
-  <div id="search-info" style="display: none;"></div>
 </div>
 
 <style>
@@ -19,6 +21,67 @@ permalink: /search/
   max-width: 800px;
   margin: 2rem auto;
   padding: 0 1rem;
+}
+
+.search-notice {
+  text-align: center;
+  padding: 3rem 2rem;
+  background: var(--light, #f8f9fa);
+  border-radius: 12px;
+  border: 2px solid var(--smoke, #e0e0e0);
+}
+
+.search-notice h2 {
+  color: var(--text-base-color, #333);
+  margin-bottom: 1rem;
+}
+
+.search-notice p {
+  color: var(--gray, #666);
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+.search-notice ul {
+  list-style: none;
+  padding: 0;
+  margin: 2rem 0;
+}
+
+.search-notice li {
+  margin: 1rem 0;
+}
+
+.search-notice a {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background: var(--text-link-blue, #003fff);
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  transition: opacity 0.3s;
+}
+
+.search-notice a:hover {
+  opacity: 0.8;
+}
+
+[data-theme="dark"] .search-notice {
+  background: var(--dark-light, #1b1d25);
+  border-color: var(--dark-smoke, #4a4d56);
+}
+
+[data-theme="dark"] .search-notice h2 {
+  color: var(--dark-white, #eaeaea);
+}
+
+[data-theme="dark"] .search-notice p {
+  color: var(--gray, #999);
+}
+
+[data-theme="dark"] .search-notice a {
+  background: var(--dark-text-link-blue, #ff5277);
 }
 
 .search-box {
