@@ -1,0 +1,25 @@
+{
+  "rules": {
+    "ratings": {
+      "$postId": {
+        ".read": true,
+        "users": {
+          "$userId": {
+            ".write": "!data.exists()",
+            ".validate": "newData.hasChildren(['rating', 'timestamp'])",
+            "rating": {
+              ".validate": "newData.isNumber() && newData.val() >= 1 && newData.val() <= 5"
+            },
+            "timestamp": {
+              ".validate": "newData.isNumber()"
+            }
+          }
+        },
+        "stats": {
+          ".write": true,
+          ".validate": "newData.hasChildren(['average', 'count', 'lastUpdated'])"
+        }
+      }
+    }
+  }
+}
