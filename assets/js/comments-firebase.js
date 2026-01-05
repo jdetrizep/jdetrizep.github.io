@@ -4,7 +4,7 @@
  */
 
 // Importar Firebase desde CDN
-import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+import { getApps, initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
 import { getDatabase, ref, set, get, push, remove, onValue, query, orderByChild } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js';
 
 // Configuración de Firebase (misma que rating-firebase.js)
@@ -18,8 +18,14 @@ const firebaseConfig = {
   appId: "1:355885882700:web:894592581a7627f4c183e9"
 };
 
-// Inicializar Firebase
-const app = initializeApp(firebaseConfig, 'comments-app');
+// Inicializar Firebase (reutilizar app existente si ya está inicializada)
+let app;
+const existingApps = getApps();
+if (existingApps.length === 0) {
+  app = initializeApp(firebaseConfig);
+} else {
+  app = existingApps[0];
+}
 const database = getDatabase(app);
 
 (function() {
