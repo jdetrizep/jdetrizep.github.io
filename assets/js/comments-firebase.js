@@ -207,47 +207,108 @@ const database = getDatabase(app);
     renderComment(comment) {
       const commentElement = document.createElement('div');
       commentElement.className = 'comment-item';
-      commentElement.setAttribute('data-comment-id', comment.id);
+      commentElement.dataset.commentId = comment.id;
       
       const date = new Date(comment.timestamp);
       const formattedDate = this.formatDate(date);
-      
-      // Verificar si el comentario es del usuario actual
       const isOwnComment = comment.userId === this.userId;
       
-      // Solo mostrar botón de eliminar si es el propio comentario
-      const deleteButton = isOwnComment ? `
-        <button class="delete-comment-btn" data-comment-id="${comment.id}" title="Eliminar mi comentario">
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-            <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-          </svg>
-        </button>
-      ` : '';
+      // Crear estructura del comentario de forma segura
+      const commentHeader = document.createElement('div');
+      commentHeader.className = 'comment-header';
       
-      commentElement.innerHTML = `
-        <div class="comment-header">
-          <div class="comment-author">
-            <span class="author-avatar">${comment.name.charAt(0).toUpperCase()}</span>
-            <span class="author-name">${comment.name}${isOwnComment ? ' <span class="own-comment-badge">(Tú)</span>' : ''}</span>
-          </div>
-          <div class="comment-meta">
-            <span class="comment-date" title="${date.toLocaleString()}">${formattedDate}</span>
-            ${deleteButton}
-          </div>
-        </div>
-        <div class="comment-body">
-          <p>${this.linkify(comment.comment)}</p>
-        </div>
-      `;
+      const commentAuthor = document.createElement('div');
+      commentAuthor.className = 'comment-author';
       
-      // Agregar event listener para eliminar solo si es propio comentario
+      const authorAvatar = document.createElement('span');
+      authorAvatar.className = 'author-avatar';
+      authorAvatar.textContent = comment.name.charAt(0).toUpperCase();
+      
+      const authorName = document.createElement('span');
+      authorName.className = 'author-name';
+      authorName.textContent = comment.name;
+      
       if (isOwnComment) {
-        const deleteBtn = commentElement.querySelector('.delete-comment-btn');
-        deleteBtn.addEventListener('click', () => this.deleteComment(comment.id, comment.userId));
+        const badge = document.createElement('span');
+        badge.className = 'own-comment-badge';
+        badge.textContent = ' (Tú)';
+        authorName.appendChild(badge);
       }
       
+      commentAuthor.appendChild(authorAvatar);
+      commentAuthor.appendChild(authorName);
+      
+      const commentMeta = document.createElement('div');
+      commentMeta.className = 'comment-meta';
+      
+      const commentDate = document.createElement('span');
+      commentDate.className = 'comment-date';
+      commentDate.textContent = formattedDate;
+      commentDate.title = date.toLocaleString();
+      
+      commentMeta.appendChild(commentDate);
+      
+      if (isOwnComment) {
+        const deleteBtn = this.createDeleteButton(comment.id, comment.userId);
+        commentMeta.appendChild(deleteBtn);
+      }
+      
+      commentHeader.appendChild(commentAuthor);
+      commentHeader.appendChild(commentMeta);
+      
+      const commentBody = document.createElement('div');
+      commentBody.className = 'comment-body';
+      
+      const commentText = document.createElement('p');
+      // Sanitizar y linkificar de forma segura
+      this.linkifySafe(comment.comment, commentText);
+      
+      commentBody.appendChild(commentText);
+      
+      commentElement.appendChild(commentHeader);
+      commentElement.appendChild(commentBody);
+      
       this.commentsList.appendChild(commentElement);
+    }
+
+    createDeleteButton(commentId, commentUserId) {
+      const button = document.createElement('button');
+      button.className = 'delete-comment-btn';
+      button.dataset.commentId = commentId;
+      button.title = 'Eliminar mi comentario';
+      
+      // Usar innerHTML solo para SVG estático (no contiene datos de usuario)
+      button.innerHTML = `
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+          <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+          <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+        </svg>
+      `;
+      
+      button.addEventListener('click', () => this.deleteComment(commentId, commentUserId));
+      return button;
+    }
+
+    linkifySafe(text, container) {
+      const urlRegex = /(https?:\/\/[^\s]+)/g;
+      const parts = text.split(urlRegex);
+      
+      parts.forEach((part, index) => {
+        if (index % 2 === 0) {
+          // Texto normal - usar textContent para prevenir XSS
+          if (part) {
+            container.appendChild(document.createTextNode(part));
+          }
+        } else {
+          // URL - crear enlace seguro
+          const link = document.createElement('a');
+          link.href = part;
+          link.target = '_blank';
+          link.rel = 'noopener noreferrer';
+          link.textContent = part;
+          container.appendChild(link);
+        }
+      });
     }
 
     async deleteComment(commentId, commentUserId) {
@@ -339,13 +400,6 @@ const database = getDatabase(app);
       return temp.innerHTML;
     }
 
-    linkify(text) {
-      const urlRegex = /(https?:\/\/[^\s]+)/g;
-      return text.replace(urlRegex, (url) => {
-        return `<a href="${url}" target="_blank" rel="noopener noreferrer">${url}</a>`;
-      });
-    }
-
     setLoading(loading) {
       if (loading) {
         this.submitBtn.disabled = true;
@@ -379,7 +433,9 @@ const database = getDatabase(app);
     const commentForm = document.querySelector('.comment-form');
     
     if (commentForm) {
-      new PostComments(commentForm);
+      const postComments = new PostComments(commentForm);
+      // Guardar referencia global para debugging si es necesario
+      globalThis.postCommentsInstance = postComments;
     }
   }
 
@@ -391,7 +447,7 @@ const database = getDatabase(app);
   }
 
   // Función de utilidad para ver todos los comentarios (consola)
-  window.viewAllComments = async function() {
+  globalThis.viewAllComments = async function() {
     try {
       const commentsRef = ref(database, 'comments');
       const snapshot = await get(commentsRef);
