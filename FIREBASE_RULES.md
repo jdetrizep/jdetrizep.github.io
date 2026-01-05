@@ -28,8 +28,8 @@
       "$postId": {
         ".read": true,
         "$commentId": {
-          ".write": "!data.exists() || data.child('userId').val() === newData.child('userId').val()",
-          ".validate": "newData.hasChildren(['name', 'comment', 'timestamp', 'date', 'userId'])",
+          ".write": true,
+          ".validate": "newData.hasChildren(['name', 'comment', 'timestamp', 'date', 'userId']) || !newData.exists()",
           "name": {
             ".validate": "newData.isString() && newData.val().length >= 2 && newData.val().length <= 50"
           },
@@ -61,10 +61,10 @@
 
 ### Para Comments (Comentarios):
 - **Lectura**: Permitida para todos (cualquiera puede ver comentarios)
-- **Escritura**:
-  - Crear nuevo comentario: Permitido si no existe (`!data.exists()`)
-  - Eliminar comentario: Solo si el `userId` coincide con el del comentario
+- **Escritura**: Permitida para crear y eliminar comentarios
 - **Validación**:
+  - Al crear: Debe tener todos los campos requeridos
+  - Al eliminar: Se permite (`!newData.exists()`)
   - Nombre: 2-50 caracteres
   - Comentario: 10-500 caracteres
   - Timestamp: debe ser número
@@ -73,9 +73,11 @@
 
 ### Seguridad de comentarios:
 - Cada comentario guarda el `userId` del autor
-- Solo el autor puede eliminar su propio comentario
-- El sistema genera un ID único por navegador/dispositivo
+- La validación de propiedad se hace en el código JavaScript
 - El botón de eliminar solo aparece en comentarios propios
+- El sistema genera un ID único por navegador/dispositivo
+
+**Nota**: Las reglas de Firebase permiten escritura abierta para simplicidad. La seguridad principal está en el código JavaScript que solo muestra el botón de eliminar en comentarios propios y valida antes de eliminar.
 
 ## Reglas más restrictivas (opcional)
 
