@@ -5,7 +5,7 @@
 
 // Importar Firebase desde CDN
 import { getApps, initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
-import { getDatabase, ref, set, get, push, remove, onValue, query, orderByChild } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js';
+import { getDatabase, ref, set, push, remove, onValue } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js';
 
 // Configuración de Firebase (misma que rating-firebase.js)
 const firebaseConfig = {
@@ -62,7 +62,7 @@ const database = getDatabase(app);
       
       if (!userId) {
         // Generar nuevo ID único
-        userId = 'user_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+        userId = 'user_' + Date.now() + '_' + Math.random().toString(36).substring(2, 11);
         localStorage.setItem('firebase_user_id', userId);
       }
       

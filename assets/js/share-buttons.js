@@ -29,6 +29,13 @@ function copyToClipboard(text, event) {
     }, 2000);
   }).catch(function(err) {
     console.error('Error al copiar:', err);
-    alert('No se pudo copiar el enlace');
+    
+    // Mostrar toast de error en lugar de alert
+    const errorToast = document.createElement('div');
+    errorToast.className = 'copy-toast error';
+    errorToast.textContent = '✗ No se pudo copiar el enlace';
+    document.body.appendChild(errorToast);
+    
+    setTimeout(() => errorToast.remove(), 3000);
   });
 }
