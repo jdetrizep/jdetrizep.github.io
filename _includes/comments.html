@@ -1,10 +1,51 @@
-<!-- unnecessary file, however you can still use for comment section, e.g disqus -->
-<script
-  src="https://utteranc.es/client.js"
-  repo="username/reponame"
-  issue-term="pathname"
-  label="✨ comment ✨"
-  theme="github-light"
-  crossorigin="anonymous"
-  async
-></script>
+<!-- Sistema de Comentarios -->
+<div class="comments-section">
+  <div class="comments-header">
+    <h3>💬 Comentarios</h3>
+    <p class="comments-count"><span class="count">0</span> comentario(s)</p>
+  </div>
+
+  <!-- Formulario para agregar comentarios -->
+  <div class="comment-form-container">
+    <h4>Deja tu comentario</h4>
+    <form class="comment-form" data-post-id="{{ page.id | slugify }}">
+      <div class="form-group">
+        <label for="comment-name">Nombre *</label>
+        <input 
+          type="text" 
+          id="comment-name" 
+          name="name" 
+          placeholder="Tu nombre" 
+          required 
+          maxlength="50"
+        >
+      </div>
+      
+      <div class="form-group">
+        <label for="comment-text">Comentario *</label>
+        <textarea 
+          id="comment-text" 
+          name="comment" 
+          placeholder="Escribe tu comentario aquí..." 
+          required 
+          maxlength="500"
+          rows="4"
+        ></textarea>
+        <small class="char-count"><span class="current">0</span>/500 caracteres</small>
+      </div>
+      
+      <button type="submit" class="submit-comment-btn">
+        <span class="btn-text">Publicar Comentario</span>
+        <span class="btn-loading" style="display: none;">Publicando...</span>
+      </button>
+    </form>
+  </div>
+
+  <!-- Lista de comentarios -->
+  <div class="comments-list">
+    <div class="no-comments" style="display: none;">
+      <p>Sé el primero en comentar este artículo 🎉</p>
+    </div>
+    <!-- Los comentarios se cargarán aquí dinámicamente -->
+  </div>
+</div>
