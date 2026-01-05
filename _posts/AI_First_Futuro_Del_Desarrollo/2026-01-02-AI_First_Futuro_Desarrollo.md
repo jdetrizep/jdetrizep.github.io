@@ -48,9 +48,9 @@ Tradicionalmente, el desarrollo de software ha sido un proceso lineal y humano-c
 En un enfoque AI-First, **la inteligencia artificial participa activamente en el proceso cognitivo**, no como sustituto del ingeniero, sino como un segundo sistema de razonamiento, capaz de analizar contexto, proponer alternativas y ejecutar tareas bajo supervisión.
 
 Esto implica asumir conscientemente que:
-	•	La IA no se invoca solo cuando “hace falta”, sino que está presente desde la concepción del problema.
-	•	El desarrollo deja de ser una actividad individual para convertirse en una colaboración humano-IA.
-	•	El valor del desarrollador se desplaza de escribir código a definir criterios, validar decisiones y gobernar el uso de la IA.
+- La IA no se invoca solo cuando “hace falta”, sino que está presente desde la concepción del problema.
+- El desarrollo deja de ser una actividad individual para convertirse en una colaboración humano-IA.
+- El valor del desarrollador se desplaza de escribir código a definir criterios, validar decisiones y gobernar el uso de la IA.
 
 AI-First no consiste en usar IA para programar, sino en **programar sabiendo que una inteligencia artificial forma parte del proceso de ingeniería**.
 
