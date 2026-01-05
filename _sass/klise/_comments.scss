@@ -233,6 +233,13 @@
     font-weight: $bold-weight;
     color: $black;
     font-size: 1rem;
+    
+    .own-comment-badge {
+      font-weight: $normal-weight;
+      font-size: 0.85rem;
+      color: $text-link-blue;
+      margin-left: 0.5rem;
+    }
   }
 }
 
@@ -419,6 +426,10 @@
 
     .author-name {
       color: $dark-white;
+      
+      .own-comment-badge {
+        color: $dark-text-link-blue;
+      }
     }
   }
 

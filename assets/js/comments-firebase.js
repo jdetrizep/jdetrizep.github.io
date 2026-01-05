@@ -50,7 +50,23 @@ const database = getDatabase(app);
       // Referencia a la base de datos
       this.commentsRef = ref(database, `comments/${this.postId}`);
       
+      // Generar ID único para el usuario
+      this.userId = this.getUserId();
+      
       this.init();
+    }
+
+    getUserId() {
+      // Intentar obtener ID existente
+      let userId = localStorage.getItem('firebase_user_id');
+      
+      if (!userId) {
+        // Generar nuevo ID único
+        userId = 'user_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+        localStorage.setItem('firebase_user_id', userId);
+      }
+      
+      return userId;
     }
 
     init() {
@@ -117,7 +133,8 @@ const database = getDatabase(app);
           name: this.sanitizeHTML(name),
           comment: this.sanitizeHTML(comment),
           timestamp: Date.now(),
-          date: new Date().toISOString()
+          date: new Date().toISOString(),
+          userId: this.userId  // Guardar ID del usuario que comenta
         };
         
         await set(newCommentRef, newComment);
@@ -195,20 +212,28 @@ const database = getDatabase(app);
       const date = new Date(comment.timestamp);
       const formattedDate = this.formatDate(date);
       
+      // Verificar si el comentario es del usuario actual
+      const isOwnComment = comment.userId === this.userId;
+      
+      // Solo mostrar botón de eliminar si es el propio comentario
+      const deleteButton = isOwnComment ? `
+        <button class="delete-comment-btn" data-comment-id="${comment.id}" title="Eliminar mi comentario">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+            <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+          </svg>
+        </button>
+      ` : '';
+      
       commentElement.innerHTML = `
         <div class="comment-header">
           <div class="comment-author">
             <span class="author-avatar">${comment.name.charAt(0).toUpperCase()}</span>
-            <span class="author-name">${comment.name}</span>
+            <span class="author-name">${comment.name}${isOwnComment ? ' <span class="own-comment-badge">(Tú)</span>' : ''}</span>
           </div>
           <div class="comment-meta">
             <span class="comment-date" title="${date.toLocaleString()}">${formattedDate}</span>
-            <button class="delete-comment-btn" data-comment-id="${comment.id}" title="Eliminar comentario">
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-                <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-                <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-              </svg>
-            </button>
+            ${deleteButton}
           </div>
         </div>
         <div class="comment-body">
@@ -216,15 +241,23 @@ const database = getDatabase(app);
         </div>
       `;
       
-      // Agregar event listener para eliminar
-      const deleteBtn = commentElement.querySelector('.delete-comment-btn');
-      deleteBtn.addEventListener('click', () => this.deleteComment(comment.id));
+      // Agregar event listener para eliminar solo si es propio comentario
+      if (isOwnComment) {
+        const deleteBtn = commentElement.querySelector('.delete-comment-btn');
+        deleteBtn.addEventListener('click', () => this.deleteComment(comment.id, comment.userId));
+      }
       
       this.commentsList.appendChild(commentElement);
     }
 
-    async deleteComment(commentId) {
-      if (!confirm('¿Estás seguro de que quieres eliminar este comentario?')) {
+    async deleteComment(commentId, commentUserId) {
+      // Verificar que sea el propio comentario
+      if (commentUserId !== this.userId) {
+        this.showNotification('Solo puedes eliminar tus propios comentarios', 'error');
+        return;
+      }
+      
+      if (!confirm('¿Estás seguro de que quieres eliminar tu comentario?')) {
         return;
       }
       

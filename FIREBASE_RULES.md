@@ -28,8 +28,8 @@
       "$postId": {
         ".read": true,
         "$commentId": {
-          ".write": true,
-          ".validate": "newData.hasChildren(['name', 'comment', 'timestamp', 'date'])",
+          ".write": "!data.exists() || data.child('userId').val() === newData.child('userId').val()",
+          ".validate": "newData.hasChildren(['name', 'comment', 'timestamp', 'date', 'userId'])",
           "name": {
             ".validate": "newData.isString() && newData.val().length >= 2 && newData.val().length <= 50"
           },
@@ -40,6 +40,9 @@
             ".validate": "newData.isNumber()"
           },
           "date": {
+            ".validate": "newData.isString()"
+          },
+          "userId": {
             ".validate": "newData.isString()"
           }
         }
@@ -58,12 +61,21 @@
 
 ### Para Comments (Comentarios):
 - **Lectura**: Permitida para todos (cualquiera puede ver comentarios)
-- **Escritura**: Permitida para todos (cualquiera puede agregar/eliminar comentarios)
-- **Validación**: 
+- **Escritura**:
+  - Crear nuevo comentario: Permitido si no existe (`!data.exists()`)
+  - Eliminar comentario: Solo si el `userId` coincide con el del comentario
+- **Validación**:
   - Nombre: 2-50 caracteres
   - Comentario: 10-500 caracteres
   - Timestamp: debe ser número
   - Date: debe ser string
+  - UserId: debe ser string (identifica al autor)
+
+### Seguridad de comentarios:
+- Cada comentario guarda el `userId` del autor
+- Solo el autor puede eliminar su propio comentario
+- El sistema genera un ID único por navegador/dispositivo
+- El botón de eliminar solo aparece en comentarios propios
 
 ## Reglas más restrictivas (opcional)
 
