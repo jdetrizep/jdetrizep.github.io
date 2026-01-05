@@ -289,6 +289,113 @@
   }
 }
 
+// Modal de confirmación de eliminación
+.delete-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10001;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+
+  &.show {
+    opacity: 1;
+
+    .delete-modal {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+}
+
+.delete-modal {
+  background: $white;
+  border-radius: 12px;
+  padding: 2rem;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  transform: scale(0.9);
+  opacity: 0;
+  transition: all 0.3s ease;
+  text-align: center;
+
+  .delete-modal-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  .delete-modal-title {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.5rem;
+    color: $black;
+    font-weight: $bold-weight;
+  }
+
+  .delete-modal-message {
+    margin: 0 0 1.5rem 0;
+    color: $gray;
+    font-size: 0.95rem;
+  }
+
+  .delete-modal-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+
+    button {
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: $bold-weight;
+      cursor: pointer;
+      transition: all 0.2s;
+      min-width: 100px;
+
+      &:active {
+        transform: scale(0.95);
+      }
+    }
+
+    .delete-modal-cancel {
+      background: $light;
+      color: $text-base-color;
+
+      &:hover {
+        background: $smoke;
+      }
+    }
+
+    .delete-modal-confirm {
+      background: #dc3545;
+      color: $white;
+
+      &:hover {
+        background: #c82333;
+      }
+    }
+  }
+
+  @include media-query($on-mobile) {
+    padding: 1.5rem;
+
+    .delete-modal-buttons {
+      flex-direction: column;
+
+      button {
+        width: 100%;
+      }
+    }
+  }
+}
+
 // Notificaciones
 .comment-notification {
   position: fixed;
@@ -456,6 +563,38 @@
 
       &:hover {
         color: $dark-text-link-blue-active;
+      }
+    }
+  }
+
+  // Modal de confirmación en modo oscuro
+  .delete-modal {
+    background: $dark-light;
+
+    .delete-modal-title {
+      color: $dark-white;
+    }
+
+    .delete-modal-message {
+      color: $dark-gray;
+    }
+
+    .delete-modal-buttons {
+      .delete-modal-cancel {
+        background: $dark-smoke;
+        color: $dark-white;
+
+        &:hover {
+          background: $dark-gray;
+        }
+      }
+
+      .delete-modal-confirm {
+        background: #ff6b6b;
+
+        &:hover {
+          background: #ff5252;
+        }
       }
     }
   }

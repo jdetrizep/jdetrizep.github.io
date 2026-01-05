@@ -257,10 +257,52 @@ const database = getDatabase(app);
         return;
       }
       
-      if (!confirm('¿Estás seguro de que quieres eliminar tu comentario?')) {
-        return;
-      }
+      // Mostrar modal de confirmación personalizado
+      this.showDeleteConfirmation(commentId);
+    }
+
+    showDeleteConfirmation(commentId) {
+      // Crear modal de confirmación
+      const modal = document.createElement('div');
+      modal.className = 'delete-modal-overlay';
+      modal.innerHTML = `
+        <div class="delete-modal">
+          <div class="delete-modal-icon">⚠️</div>
+          <h3 class="delete-modal-title">¿Eliminar comentario?</h3>
+          <p class="delete-modal-message">Esta acción no se puede deshacer</p>
+          <div class="delete-modal-buttons">
+            <button class="delete-modal-cancel">Cancelar</button>
+            <button class="delete-modal-confirm">Eliminar</button>
+          </div>
+        </div>
+      `;
       
+      document.body.appendChild(modal);
+      
+      // Animar entrada
+      setTimeout(() => modal.classList.add('show'), 10);
+      
+      // Event listeners
+      const cancelBtn = modal.querySelector('.delete-modal-cancel');
+      const confirmBtn = modal.querySelector('.delete-modal-confirm');
+      
+      const closeModal = () => {
+        modal.classList.remove('show');
+        setTimeout(() => modal.remove(), 300);
+      };
+      
+      cancelBtn.addEventListener('click', closeModal);
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+      });
+      
+      confirmBtn.addEventListener('click', async () => {
+        closeModal();
+        await this.performDelete(commentId);
+      });
+    }
+
+    async performDelete(commentId) {
       try {
         const commentRef = ref(database, `comments/${this.postId}/${commentId}`);
         await remove(commentRef);
