@@ -5,7 +5,7 @@ layout: pageAbout
 excerpt: Hola soy Jorge De Trinidad Zepeda, actualmente tengo el rol de Senior Solution Architect, transformando requerimientos funcionales en arquitecturas técnicas sólidas y alineadas a los objetivos estratégicos del negocio. 
 comments: false
 ---
-Soy un **Senior Solution Architect** con más de 15 años de experiencia en desarrollo de sistemas bancarios y en la implementación de prácticas de DevOps, CI/CD y automatización. Mi especialidad abarca diversas tecnologías, incluyendo **Java, C#, ASP.NET Core, Azure, y sistemas IBM i (RPGLE, SQLRPGLE, Full Free)**. También tengo experiencia en desarrollo móvil con **Kotlin (Android) y Swift/Objective-C (iOS)**.
+Soy un **Senior Solution Architect** con más de 17 años de experiencia en desarrollo de sistemas bancarios y en la implementación de prácticas de DevOps, CI/CD y automatización. Mi especialidad abarca diversas tecnologías, incluyendo **Java, C#, ASP.NET Core, Azure, y sistemas IBM i (RPGLE, SQLRPGLE, Full Free)**. También tengo experiencia en desarrollo móvil con **Kotlin (Android) y Swift/Objective-C (iOS)**.
 
 Además de mi trabajo en el desarrollo de software, soy **profesor y mentor** de nuevos programadores, ayudándolos a fortalecer sus habilidades en Java, AS400 y bases de datos DB2. Me apasiona la enseñanza y la adopción de buenas prácticas de programación, estándares modernos y el uso responsable de la inteligencia artificial en el desarrollo de software.
 
