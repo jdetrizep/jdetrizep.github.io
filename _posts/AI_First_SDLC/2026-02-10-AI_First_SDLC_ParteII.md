@@ -1,8 +1,8 @@
 ---
 layout: post
 title: AI-First dentro del SDLC Parte II
-date: 2026-02-10 08:00
-modified: 2026-02-10 08:00
+date: 2026-02-09 05:00
+modified: 2026-02-09 05:00
 description: AI-First dentro del SDLC - Una reforma silenciosa en el desarrollo de software (Parte II)
 tag:
   - AI-First
