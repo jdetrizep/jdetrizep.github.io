@@ -9,24 +9,31 @@ Soy un **Senior Solution Architect** con más de 17 años de experiencia en desa
 
 Además de mi trabajo en el desarrollo de software, soy **profesor y mentor** de nuevos programadores, ayudándolos a fortalecer sus habilidades en Java, AS400 y bases de datos DB2. Me apasiona la enseñanza y la adopción de buenas prácticas de programación, estándares modernos y el uso responsable de la inteligencia artificial en el desarrollo de software.
 
-Soy **IBM Influencer 2025**, **IBM Advocate 2025** e **IBM Contributor 2025**, lo que refleja mi compromiso con la innovación y la comunidad de desarrolladores en tecnologías IBM. También cuento con certificaciones en:
-<ul>
-    <li>DevOps Engineer (CM-DOTP)</li>
-    <li>IBM i Ready</li>
-    <li>IBM i Development Foundations</li>
-    <li>Azure AI Fundamentals</li>
-    <li>IBM Artificial Intelligence Fundamentals</li>
-    <li>Oracle Cloud Infrastructure AI Foundations Associate</li>
-    <li>watsonx.ai Data Science and MLOps Practitioner Advanced</li>
-    <li>Data Science and AI: Del Concepto a Desarrollo de Aplicaciones</li>
-    <li>Microsoft Certification GitHub Copilot</li>
-    <li>Watsonx Code Assistant Practitioner Advanced</li>
-    <li>MCP (Microsoft Certified Professional)</li>
-    <li>Cybersecurity Awareness Professional</li>
-    <li>Scrum Master</li>
-    <li>Lean Six Sigma White Belt</li>
-    <li>IBM Enterprise Design Thinking</li>
-</ul>
+Del programa **IBM Rising Champions**, he sido reconocido como **IBM Influencer 2025**, **IBM Advocate 2025** e **IBM Contributor 2025**, lo que refleja mi compromiso con la innovación y la comunidad de desarrolladores en tecnologías IBM. 
+
+Adicionalmente, he obtenido credenciales dentro del **programa IBM i Community**, alcanzando los siguientes niveles en la ruta de insignias de la comunidad:
+- **IBM i Community Contributor (Level 1)**
+- **IBM i Community Influencer (Level 2)**
+- **IBM i Community Advocate (Level 3)**
+
+Estos logros reflejan una contribución sostenida y visible a la comunidad IBM i (participación activa, liderazgo técnico, generación de contenido, apoyo y guía a otros miembros), y fortalecen el posicionamiento profesional en el ecosistema IBM i / Power.
+
+También cuento con certificaciones en:
+- DevOps Engineer (CM-DOTP)
+- IBM i Ready
+- IBM i Development Foundations
+- Azure AI Fundamentals
+- IBM Artificial Intelligence Fundamentals
+- Oracle Cloud Infrastructure AI Foundations Associate
+- watsonx.ai Data Science and MLOps Practitioner Advanced
+- Data Science and AI: Del Concepto a Desarrollo de Aplicaciones
+- Microsoft Certification GitHub Copilot
+- Watsonx Code Assistant Practitioner Advanced
+- MCP (Microsoft Certified Professional)
+- Cybersecurity Awareness Professional
+- Scrum Master
+- Lean Six Sigma White Belt
+- IBM Enterprise Design Thinking
 
 En este blog compartiré contenido sobre **DevOps, CI/CD, desarrollo backend, arquitecturas en la nube, mejores prácticas de programación y análisis de herramientas de IA**. Mi objetivo es aportar conocimiento y ayudar a la comunidad de desarrolladores a mejorar sus habilidades y optimizar sus procesos de desarrollo.
 
