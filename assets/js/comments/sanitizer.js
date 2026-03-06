@@ -1,28 +1,26 @@
 /**
- * Módulo de sanitización HTML para el sistema de comentarios
- * Previene ataques XSS y sanitiza entrada del usuario
+ * CommentsSanitizer - Sanitización y seguridad de contenido
+ * Responsable de prevenir XSS y sanitizar HTML
  */
 
-export class HTMLSanitizer {
+export class CommentsSanitizer {
   /**
    * Sanitiza texto HTML para prevenir XSS
    * @param {string} str - Texto a sanitizar
    * @returns {string} Texto sanitizado
    */
-  static sanitize(str) {
-    if (!str) return '';
-    
+  static sanitizeHTML(str) {
     const temp = document.createElement('div');
     temp.textContent = str;
     return temp.innerHTML;
   }
 
   /**
-   * Convierte URLs en texto a enlaces clickeables de forma segura
+   * Convierte URLs en texto a enlaces seguros
    * @param {string} text - Texto que puede contener URLs
    * @param {HTMLElement} container - Contenedor donde agregar el contenido
    */
-  static linkify(text, container) {
+  static linkifySafe(text, container) {
     const urlRegex = /(https?:\/\/[^\s]+)/g;
     const parts = text.split(urlRegex);
     
@@ -42,28 +40,5 @@ export class HTMLSanitizer {
         container.appendChild(link);
       }
     });
-  }
-
-  /**
-   * Limpia espacios en blanco excesivos
-   * @param {string} str - Texto a limpiar
-   * @returns {string} Texto limpio
-   */
-  static trim(str) {
-    return str ? str.trim().replace(/\s+/g, ' ') : '';
-  }
-
-  /**
-   * Valida que una URL sea segura
-   * @param {string} url - URL a validar
-   * @returns {boolean} true si es segura
-   */
-  static isSafeUrl(url) {
-    try {
-      const urlObj = new URL(url);
-      return urlObj.protocol === 'http:' || urlObj.protocol === 'https:';
-    } catch {
-      return false;
-    }
   }
 }

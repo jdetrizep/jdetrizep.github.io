@@ -1,26 +1,24 @@
 /**
- * Controlador principal del sistema de comentarios
- * Coordina la interacción entre todos los módulos
+ * CommentsController - Controlador principal del sistema de comentarios
+ * Orquesta todos los módulos y maneja la lógica de negocio
  */
 
-import { CommentStorage } from './storage.js';
-import { CommentValidator } from './validator.js';
-import { CommentRenderer } from './renderer.js';
-import { HTMLSanitizer } from './sanitizer.js';
-import { NotificationManager } from './notification.js';
-import { ModalManager } from './modal.js';
+import { CommentsStorage } from './storage.js';
+import { CommentsValidator } from './validator.js';
+import { CommentsSanitizer } from './sanitizer.js';
+import { CommentsNotification } from './notification.js';
+import { CommentsUI } from './ui.js';
 
-export class CommentController {
+export class CommentsController {
   /**
-   * Crea una instancia del controlador de comentarios
    * @param {Object} database - Instancia de Firebase Database
-   * @param {HTMLElement} form - Formulario de comentarios
+   * @param {HTMLFormElement} form - Formulario de comentarios
    */
   constructor(database, form) {
     this.form = form;
     this.postId = form.dataset.postId;
     
-    // Elementos del formulario
+    // Referencias DOM
     this.nameInput = form.querySelector('#comment-name');
     this.commentInput = form.querySelector('#comment-text');
     this.charCount = form.querySelector('.char-count .current');
@@ -28,37 +26,36 @@ export class CommentController {
     this.btnText = this.submitBtn.querySelector('.btn-text');
     this.btnLoading = this.submitBtn.querySelector('.btn-loading');
     
-    // Elementos de la lista
     this.commentsList = document.querySelector('.comments-list');
     this.commentsCount = document.querySelector('.comments-count .count');
     this.noComments = document.querySelector('.no-comments');
     
     // Inicializar módulos
-    this.userId = CommentStorage.getUserId();
-    this.storage = new CommentStorage(database, this.postId);
-    this.renderer = new CommentRenderer(
-      this.commentsList,
-      this.commentsCount,
-      this.noComments,
-      this.userId
-    );
+    this.storage = new CommentsStorage(database, this.postId);
+    this.ui = new CommentsUI(this.commentsList, this.commentsCount, this.noComments);
+    this.userId = CommentsStorage.getUserId();
     
     this.init();
   }
 
   /**
-   * Inicializa el controlador y sus event listeners
+   * Inicializa el controlador
    */
   init() {
-    // Cargar comentarios existentes
     this.loadComments();
-    
-    // Event listener para el contador de caracteres
+    this.attachEventListeners();
+  }
+
+  /**
+   * Adjunta event listeners
+   */
+  attachEventListeners() {
+    // Contador de caracteres
     this.commentInput.addEventListener('input', () => {
       this.updateCharCount();
     });
     
-    // Event listener para el formulario
+    // Envío de formulario
     this.form.addEventListener('submit', (e) => {
       e.preventDefault();
       this.handleSubmit();
@@ -66,145 +63,152 @@ export class CommentController {
   }
 
   /**
-   * Carga los comentarios desde Firebase
-   */
-  loadComments() {
-    this.storage.listenToComments(
-      (comments) => {
-        this.renderer.renderComments(comments);
-        
-        // Actualizar el renderizado con el callback de eliminación
-        comments.forEach(comment => {
-          const element = this.commentsList.querySelector(`[data-comment-id="${comment.id}"]`);
-          if (element && comment.userId === this.userId) {
-            const deleteBtn = element.querySelector('.delete-comment-btn');
-            if (deleteBtn) {
-              deleteBtn.addEventListener('click', () => this.handleDelete(comment.id, comment.userId));
-            }
-          }
-        });
-      },
-      (error) => {
-        NotificationManager.error('Error al cargar comentarios');
-      }
-    );
-  }
-
-  /**
    * Actualiza el contador de caracteres
    */
   updateCharCount() {
     const length = this.commentInput.value.length;
-    this.charCount.textContent = length;
-    
-    // Cambiar color según el nivel de advertencia
-    const warningLevel = CommentValidator.getWarningLevel(length);
-    
-    switch (warningLevel) {
-      case 'critical':
-        this.charCount.style.color = '#dc3545';
-        break;
-      case 'warning':
-        this.charCount.style.color = '#ffc107';
-        break;
-      default:
-        this.charCount.style.color = '#6c757d';
-    }
+    CommentsUI.updateCharCount(
+      this.charCount,
+      length,
+      CommentsValidator.MAX_COMMENT_LENGTH
+    );
   }
 
   /**
    * Maneja el envío del formulario
    */
   async handleSubmit() {
-    const name = HTMLSanitizer.trim(this.nameInput.value);
-    const comment = HTMLSanitizer.trim(this.commentInput.value);
+    const name = this.nameInput.value.trim();
+    const comment = this.commentInput.value.trim();
     
-    // Validar entrada
-    const validation = CommentValidator.validate(name, comment);
+    // Validar
+    const validation = CommentsValidator.validate(name, comment);
     if (!validation.valid) {
-      NotificationManager.error(validation.error);
+      CommentsNotification.show(validation.error, 'error');
       return;
     }
     
     // Mostrar estado de carga
     this.setLoading(true);
     
+    // Guardar comentario
+    await this.saveComment(name, comment);
+  }
+
+  /**
+   * Guarda un comentario
+   */
+  async saveComment(name, comment) {
     try {
-      // Sanitizar y guardar
       const commentData = {
-        name: HTMLSanitizer.sanitize(name),
-        comment: HTMLSanitizer.sanitize(comment),
+        name: CommentsSanitizer.sanitizeHTML(name),
+        comment: CommentsSanitizer.sanitizeHTML(comment),
+        timestamp: Date.now(),
+        date: new Date().toISOString(),
         userId: this.userId
       };
       
-      const commentId = await this.storage.saveComment(commentData);
+      await this.storage.saveComment(commentData);
       
       // Limpiar formulario
       this.form.reset();
       this.updateCharCount();
       this.setLoading(false);
       
-      // Mostrar notificación de éxito
-      NotificationManager.success('¡Comentario publicado exitosamente!');
+      // Mostrar notificación
+      CommentsNotification.show('¡Comentario publicado exitosamente!', 'success');
       
-      // Resaltar el nuevo comentario después de un momento
-      setTimeout(() => {
-        this.renderer.highlightNewest();
-      }, 500);
+      // Scroll al nuevo comentario
+      this.ui.scrollToLatest();
     } catch (error) {
+      console.error('Error al guardar comentario:', error);
       this.setLoading(false);
-      NotificationManager.error('Error al publicar el comentario. Intenta de nuevo.');
+      CommentsNotification.show('Error al publicar el comentario. Intenta de nuevo.', 'error');
     }
+  }
+
+  /**
+   * Carga comentarios desde Firebase
+   */
+  loadComments() {
+    this.storage.listenToComments(
+      (comments) => this.handleCommentsLoaded(comments),
+      (error) => this.handleCommentsError(error)
+    );
+  }
+
+  /**
+   * Maneja comentarios cargados
+   */
+  handleCommentsLoaded(comments) {
+    // Actualizar contador
+    this.ui.updateCount(comments.length);
+    
+    // Mostrar/ocultar mensaje de sin comentarios
+    this.ui.toggleNoComments(comments.length === 0);
+    
+    if (comments.length === 0) {
+      this.ui.clearComments();
+      return;
+    }
+    
+    // Limpiar y renderizar comentarios
+    this.ui.clearComments();
+    comments.forEach(comment => {
+      this.ui.renderComment(
+        comment,
+        this.userId,
+        (commentId, userId) => this.handleDelete(commentId, userId)
+      );
+    });
+  }
+
+  /**
+   * Maneja errores al cargar comentarios
+   */
+  handleCommentsError(error) {
+    console.error('Error cargando comentarios:', error);
+    CommentsNotification.show('Error al cargar comentarios', 'error');
   }
 
   /**
    * Maneja la eliminación de un comentario
-   * @param {string} commentId - ID del comentario
-   * @param {string} commentUserId - ID del usuario que creó el comentario
    */
-  async handleDelete(commentId, commentUserId) {
-    // Verificar que sea el propio comentario
-    if (commentUserId !== this.userId) {
-      NotificationManager.error('Solo puedes eliminar tus propios comentarios');
+  handleDelete(commentId, commentUserId) {
+    // Verificar permisos
+    if (!CommentsValidator.canDelete(commentUserId, this.userId)) {
+      CommentsNotification.show('Solo puedes eliminar tus propios comentarios', 'error');
       return;
     }
     
-    // Mostrar modal de confirmación
-    const confirmed = await ModalManager.showDeleteConfirmation();
-    
-    if (!confirmed) {
-      return;
-    }
-    
+    // Mostrar confirmación
+    CommentsNotification.showDeleteConfirmation(
+      () => this.performDelete(commentId)
+    );
+  }
+
+  /**
+   * Ejecuta la eliminación del comentario
+   */
+  async performDelete(commentId) {
     try {
       await this.storage.deleteComment(commentId);
-      NotificationManager.info('Comentario eliminado');
+      CommentsNotification.show('Comentario eliminado', 'info');
     } catch (error) {
-      NotificationManager.error('Error al eliminar el comentario');
+      console.error('Error al eliminar comentario:', error);
+      CommentsNotification.show('Error al eliminar el comentario', 'error');
     }
   }
 
   /**
-   * Establece el estado de carga del botón de envío
-   * @param {boolean} loading - true para mostrar estado de carga
+   * Establece el estado de carga
    */
   setLoading(loading) {
-    if (loading) {
-      this.submitBtn.disabled = true;
-      this.btnText.style.display = 'none';
-      this.btnLoading.style.display = 'inline';
-    } else {
-      this.submitBtn.disabled = false;
-      this.btnText.style.display = 'inline';
-      this.btnLoading.style.display = 'none';
-    }
-  }
-
-  /**
-   * Limpia el formulario
-   */
-  reset() {
-    this.form.reset();
-    this.updateCharCount();
+    CommentsUI.setLoadingState(
+      this.submitBtn,
+      this.btnText,
+      this.btnLoading,
+      loading
+    );
   }
 }

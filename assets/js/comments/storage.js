@@ -1,15 +1,14 @@
 /**
- * Módulo de almacenamiento para el sistema de comentarios
- * Maneja todas las operaciones con Firebase Realtime Database
+ * CommentsStorage - Manejo de almacenamiento en Firebase
+ * Responsable de todas las operaciones CRUD con Firebase Realtime Database
  */
 
-import { ref, set, push, remove, onValue, get } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js';
+import { ref, set, push, remove, onValue } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js';
 
-export class CommentStorage {
+export class CommentsStorage {
   /**
-   * Crea una instancia del gestor de almacenamiento
    * @param {Object} database - Instancia de Firebase Database
-   * @param {string} postId - ID del post
+   * @param {string} postId - ID del post actual
    */
   constructor(database, postId) {
     this.database = database;
@@ -20,28 +19,11 @@ export class CommentStorage {
   /**
    * Guarda un nuevo comentario en Firebase
    * @param {Object} commentData - Datos del comentario
-   * @param {string} commentData.name - Nombre del autor
-   * @param {string} commentData.comment - Texto del comentario
-   * @param {string} commentData.userId - ID del usuario
-   * @returns {Promise<string>} ID del comentario creado
+   * @returns {Promise<void>}
    */
   async saveComment(commentData) {
-    try {
-      const newCommentRef = push(this.commentsRef);
-      const comment = {
-        name: commentData.name,
-        comment: commentData.comment,
-        timestamp: Date.now(),
-        date: new Date().toISOString(),
-        userId: commentData.userId
-      };
-      
-      await set(newCommentRef, comment);
-      return newCommentRef.key;
-    } catch (error) {
-      console.error('Error al guardar comentario:', error);
-      throw new Error('No se pudo guardar el comentario');
-    }
+    const newCommentRef = push(this.commentsRef);
+    await set(newCommentRef, commentData);
   }
 
   /**
@@ -50,70 +32,40 @@ export class CommentStorage {
    * @returns {Promise<void>}
    */
   async deleteComment(commentId) {
-    try {
-      const commentRef = ref(this.database, `comments/${this.postId}/${commentId}`);
-      await remove(commentRef);
-    } catch (error) {
-      console.error('Error al eliminar comentario:', error);
-      throw new Error('No se pudo eliminar el comentario');
-    }
+    const commentRef = ref(this.database, `comments/${this.postId}/${commentId}`);
+    await remove(commentRef);
   }
 
   /**
    * Escucha cambios en tiempo real de los comentarios
-   * @param {Function} callback - Función a ejecutar cuando hay cambios
-   * @param {Function} errorCallback - Función a ejecutar en caso de error
+   * @param {Function} onSuccess - Callback cuando se cargan comentarios
+   * @param {Function} onError - Callback cuando hay error
    */
-  listenToComments(callback, errorCallback) {
-    onValue(this.commentsRef, (snapshot) => {
-      const comments = [];
-      
-      snapshot.forEach((childSnapshot) => {
-        const comment = childSnapshot.val();
-        comment.id = childSnapshot.key;
-        comments.push(comment);
-      });
-      
-      // Ordenar por más reciente primero
-      comments.sort((a, b) => b.timestamp - a.timestamp);
-      
-      callback(comments);
-    }, (error) => {
-      console.error('Error cargando comentarios:', error);
-      if (errorCallback) {
-        errorCallback(error);
-      }
-    });
-  }
-
-  /**
-   * Obtiene todos los comentarios una sola vez
-   * @returns {Promise<Array>} Array de comentarios
-   */
-  async getAllComments() {
-    try {
-      const snapshot = await get(this.commentsRef);
-      const comments = [];
-      
-      if (snapshot.exists()) {
+  listenToComments(onSuccess, onError) {
+    onValue(
+      this.commentsRef,
+      (snapshot) => {
+        const comments = [];
+        
         snapshot.forEach((childSnapshot) => {
           const comment = childSnapshot.val();
           comment.id = childSnapshot.key;
           comments.push(comment);
         });
         
+        // Ordenar por más reciente primero
         comments.sort((a, b) => b.timestamp - a.timestamp);
+        
+        onSuccess(comments);
+      },
+      (error) => {
+        onError(error);
       }
-      
-      return comments;
-    } catch (error) {
-      console.error('Error al obtener comentarios:', error);
-      throw new Error('No se pudieron cargar los comentarios');
-    }
+    );
   }
 
   /**
-   * Obtiene el ID único del usuario desde localStorage
+   * Genera o recupera un ID único para el usuario
    * @returns {string} ID del usuario
    */
   static getUserId() {

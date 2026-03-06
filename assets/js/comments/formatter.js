@@ -1,40 +1,32 @@
 /**
- * Módulo de formateo de fechas para el sistema de comentarios
- * Convierte timestamps a formatos legibles
+ * CommentsFormatter - Formateo de fechas y texto
+ * Responsable de formatear fechas de forma legible
  */
 
-export class DateFormatter {
+export class CommentsFormatter {
+  static MINUTE_MS = 60000;
+  static HOUR_MS = 3600000;
+  static DAY_MS = 86400000;
+
   /**
-   * Formatea una fecha a formato relativo (ej: "Hace 2 horas")
-   * @param {Date|number} date - Fecha a formatear
+   * Formatea una fecha de forma relativa (hace X tiempo)
+   * @param {Date} date - Fecha a formatear
    * @returns {string} Fecha formateada
    */
-  static formatRelative(date) {
-    const dateObj = date instanceof Date ? date : new Date(date);
+  static formatDate(date) {
     const now = new Date();
-    const diff = now - dateObj;
+    const diff = now - date;
     
-    const minutes = Math.floor(diff / 60000);
-    const hours = Math.floor(diff / 3600000);
-    const days = Math.floor(diff / 86400000);
+    const minutes = Math.floor(diff / this.MINUTE_MS);
+    const hours = Math.floor(diff / this.HOUR_MS);
+    const days = Math.floor(diff / this.DAY_MS);
     
     if (minutes < 1) return 'Hace un momento';
     if (minutes < 60) return `Hace ${minutes} minuto${minutes > 1 ? 's' : ''}`;
     if (hours < 24) return `Hace ${hours} hora${hours > 1 ? 's' : ''}`;
     if (days < 7) return `Hace ${days} día${days > 1 ? 's' : ''}`;
     
-    return this.formatAbsolute(dateObj);
-  }
-
-  /**
-   * Formatea una fecha a formato absoluto (ej: "15 mar 2026")
-   * @param {Date|number} date - Fecha a formatear
-   * @returns {string} Fecha formateada
-   */
-  static formatAbsolute(date) {
-    const dateObj = date instanceof Date ? date : new Date(date);
-    
-    return dateObj.toLocaleDateString('es-ES', { 
+    return date.toLocaleDateString('es-ES', { 
       year: 'numeric', 
       month: 'short', 
       day: 'numeric' 
@@ -42,20 +34,16 @@ export class DateFormatter {
   }
 
   /**
-   * Formatea una fecha a formato completo para tooltips
-   * @param {Date|number} date - Fecha a formatear
-   * @returns {string} Fecha formateada
+   * Obtiene el color del contador de caracteres según la longitud
+   * @param {number} length - Longitud actual del texto
+   * @param {number} maxLength - Longitud máxima permitida
+   * @returns {string} Color CSS
    */
-  static formatFull(date) {
-    const dateObj = date instanceof Date ? date : new Date(date);
-    return dateObj.toLocaleString('es-ES');
-  }
-
-  /**
-   * Obtiene el timestamp actual
-   * @returns {number} Timestamp en milisegundos
-   */
-  static now() {
-    return Date.now();
+  static getCharCountColor(length, maxLength) {
+    const ratio = length / maxLength;
+    
+    if (ratio > 0.9) return '#dc3545'; // Rojo
+    if (ratio > 0.8) return '#ffc107'; // Amarillo
+    return '#6c757d'; // Gris
   }
 }

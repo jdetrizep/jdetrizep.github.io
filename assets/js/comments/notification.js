@@ -1,17 +1,17 @@
 /**
- * Módulo de notificaciones para el sistema de comentarios
- * Muestra mensajes toast al usuario
+ * CommentsNotification - Sistema de notificaciones
+ * Responsable de mostrar mensajes al usuario
  */
 
-// Constantes de configuración
-const NOTIFICATION_DURATION = 3000;
-const ANIMATION_DURATION = 300;
+export class CommentsNotification {
+  static DISPLAY_DURATION = 3000;
+  static ANIMATION_DELAY = 10;
+  static FADE_OUT_DURATION = 300;
 
-export class NotificationManager {
   /**
    * Muestra una notificación al usuario
    * @param {string} message - Mensaje a mostrar
-   * @param {string} type - Tipo de notificación: 'success', 'error', 'warning', 'info'
+   * @param {string} type - Tipo de notificación (info, success, error)
    */
   static show(message, type = 'info') {
     const notification = document.createElement('div');
@@ -21,55 +21,57 @@ export class NotificationManager {
     document.body.appendChild(notification);
     
     // Animar entrada
-    setTimeout(() => notification.classList.add('show'), 10);
+    setTimeout(() => notification.classList.add('show'), this.ANIMATION_DELAY);
     
-    // Auto-cerrar después del tiempo configurado
+    // Animar salida y remover
     setTimeout(() => {
       notification.classList.remove('show');
-      setTimeout(() => notification.remove(), ANIMATION_DURATION);
-    }, NOTIFICATION_DURATION);
+      setTimeout(() => notification.remove(), this.FADE_OUT_DURATION);
+    }, this.DISPLAY_DURATION);
   }
 
   /**
-   * Muestra una notificación de éxito
-   * @param {string} message - Mensaje a mostrar
+   * Muestra un modal de confirmación para eliminar
+   * @param {Function} onConfirm - Callback cuando se confirma
+   * @param {Function} onCancel - Callback cuando se cancela
    */
-  static success(message) {
-    this.show(message, 'success');
-  }
-
-  /**
-   * Muestra una notificación de error
-   * @param {string} message - Mensaje a mostrar
-   */
-  static error(message) {
-    this.show(message, 'error');
-  }
-
-  /**
-   * Muestra una notificación de advertencia
-   * @param {string} message - Mensaje a mostrar
-   */
-  static warning(message) {
-    this.show(message, 'warning');
-  }
-
-  /**
-   * Muestra una notificación informativa
-   * @param {string} message - Mensaje a mostrar
-   */
-  static info(message) {
-    this.show(message, 'info');
-  }
-
-  /**
-   * Elimina todas las notificaciones activas
-   */
-  static clearAll() {
-    const notifications = document.querySelectorAll('.comment-notification');
-    notifications.forEach(notification => {
-      notification.classList.remove('show');
-      setTimeout(() => notification.remove(), ANIMATION_DURATION);
+  static showDeleteConfirmation(onConfirm, onCancel = null) {
+    const modal = document.createElement('div');
+    modal.className = 'delete-modal-overlay';
+    modal.innerHTML = `
+      <div class="delete-modal">
+        <div class="delete-modal-icon">⚠️</div>
+        <h3 class="delete-modal-title">¿Eliminar comentario?</h3>
+        <p class="delete-modal-message">Esta acción no se puede deshacer</p>
+        <div class="delete-modal-buttons">
+          <button class="delete-modal-cancel">Cancelar</button>
+          <button class="delete-modal-confirm">Eliminar</button>
+        </div>
+      </div>
+    `;
+    
+    document.body.appendChild(modal);
+    
+    // Animar entrada
+    setTimeout(() => modal.classList.add('show'), this.ANIMATION_DELAY);
+    
+    const cancelBtn = modal.querySelector('.delete-modal-cancel');
+    const confirmBtn = modal.querySelector('.delete-modal-confirm');
+    
+    const closeModal = () => {
+      modal.classList.remove('show');
+      setTimeout(() => modal.remove(), this.FADE_OUT_DURATION);
+      if (onCancel) onCancel();
+    };
+    
+    cancelBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal();
+    });
+    
+    confirmBtn.addEventListener('click', () => {
+      closeModal();
+      onConfirm();
     });
   }
 }

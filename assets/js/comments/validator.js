@@ -1,23 +1,21 @@
 /**
- * Módulo de validación para el sistema de comentarios
- * Valida la entrada del usuario antes de guardar
+ * CommentsValidator - Validación de datos de comentarios
+ * Responsable de validar entradas del usuario
  */
 
-// Constantes de validación
-const MIN_NAME_LENGTH = 2;
-const MAX_NAME_LENGTH = 50;
-const MIN_COMMENT_LENGTH = 10;
-const MAX_COMMENT_LENGTH = 500;
+export class CommentsValidator {
+  static MIN_NAME_LENGTH = 2;
+  static MIN_COMMENT_LENGTH = 10;
+  static MAX_COMMENT_LENGTH = 500;
 
-export class CommentValidator {
   /**
    * Valida los datos de un comentario
    * @param {string} name - Nombre del autor
    * @param {string} comment - Texto del comentario
-   * @returns {Object} Resultado de la validación {valid: boolean, error: string}
+   * @returns {Object} { valid: boolean, error: string|null }
    */
   static validate(name, comment) {
-    // Validar que los campos no estén vacíos
+    // Validar campos vacíos
     if (!name || !comment) {
       return {
         valid: false,
@@ -26,94 +24,39 @@ export class CommentValidator {
     }
 
     // Validar longitud del nombre
-    if (name.length < MIN_NAME_LENGTH) {
+    if (name.length < this.MIN_NAME_LENGTH) {
       return {
         valid: false,
-        error: `El nombre debe tener al menos ${MIN_NAME_LENGTH} caracteres`
+        error: `El nombre debe tener al menos ${this.MIN_NAME_LENGTH} caracteres`
       };
     }
 
-    if (name.length > MAX_NAME_LENGTH) {
+    // Validar longitud mínima del comentario
+    if (comment.length < this.MIN_COMMENT_LENGTH) {
       return {
         valid: false,
-        error: `El nombre no puede exceder ${MAX_NAME_LENGTH} caracteres`
+        error: `El comentario debe tener al menos ${this.MIN_COMMENT_LENGTH} caracteres`
       };
     }
 
-    // Validar longitud del comentario
-    if (comment.length < MIN_COMMENT_LENGTH) {
+    // Validar longitud máxima del comentario
+    if (comment.length > this.MAX_COMMENT_LENGTH) {
       return {
         valid: false,
-        error: `El comentario debe tener al menos ${MIN_COMMENT_LENGTH} caracteres`
+        error: `El comentario no puede exceder ${this.MAX_COMMENT_LENGTH} caracteres`
       };
     }
 
-    if (comment.length > MAX_COMMENT_LENGTH) {
-      return {
-        valid: false,
-        error: `El comentario no puede exceder ${MAX_COMMENT_LENGTH} caracteres`
-      };
-    }
-
-    // Validación exitosa
-    return {
-      valid: true,
-      error: null
-    };
+    return { valid: true, error: null };
   }
 
   /**
-   * Valida solo el nombre
-   * @param {string} name - Nombre a validar
-   * @returns {boolean} true si es válido
+   * Verifica si un usuario puede eliminar un comentario
+   * @param {string} commentUserId - ID del usuario que creó el comentario
+   * @param {string} currentUserId - ID del usuario actual
+   * @returns {boolean}
    */
-  static isValidName(name) {
-    return name && 
-           name.length >= MIN_NAME_LENGTH && 
-           name.length <= MAX_NAME_LENGTH;
-  }
-
-  /**
-   * Valida solo el comentario
-   * @param {string} comment - Comentario a validar
-   * @returns {boolean} true si es válido
-   */
-  static isValidComment(comment) {
-    return comment && 
-           comment.length >= MIN_COMMENT_LENGTH && 
-           comment.length <= MAX_COMMENT_LENGTH;
-  }
-
-  /**
-   * Obtiene el límite máximo de caracteres para comentarios
-   * @returns {number} Límite máximo
-   */
-  static getMaxCommentLength() {
-    return MAX_COMMENT_LENGTH;
-  }
-
-  /**
-   * Obtiene el límite mínimo de caracteres para comentarios
-   * @returns {number} Límite mínimo
-   */
-  static getMinCommentLength() {
-    return MIN_COMMENT_LENGTH;
-  }
-
-  /**
-   * Calcula el nivel de advertencia basado en la longitud del comentario
-   * @param {number} length - Longitud actual del comentario
-   * @returns {string} 'normal', 'warning', 'critical'
-   */
-  static getWarningLevel(length) {
-    const warningThreshold = MAX_COMMENT_LENGTH * 0.8; // 80%
-    const criticalThreshold = MAX_COMMENT_LENGTH * 0.9; // 90%
-
-    if (length >= criticalThreshold) {
-      return 'critical';
-    } else if (length >= warningThreshold) {
-      return 'warning';
-    }
-    return 'normal';
+  static canDelete(commentUserId, currentUserId) {
+    return commentUserId === currentUserId;
   }
 }

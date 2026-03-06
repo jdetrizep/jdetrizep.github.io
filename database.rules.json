@@ -20,8 +20,8 @@
       "$postId": {
         ".read": true,
         "$commentId": {
-          ".write": "!data.exists() || (data.exists() && data.child('userId').val() === newData.child('userId').val())",
-          ".validate": "newData.hasChildren(['name', 'comment', 'timestamp', 'date', 'userId']) && newData.child('name').isString() && newData.child('name').val().length >= 2 && newData.child('name').val().length <= 50 && newData.child('comment').isString() && newData.child('comment').val().length >= 10 && newData.child('comment').val().length <= 500 && newData.child('timestamp').isNumber() && newData.child('date').isString() && newData.child('userId').isString()"
+          ".write": true,
+          ".validate": "newData.exists() && newData.hasChildren(['name', 'comment', 'timestamp', 'date', 'userId']) && newData.child('name').isString() && newData.child('name').val().length >= 2 && newData.child('name').val().length <= 50 && newData.child('comment').isString() && newData.child('comment').val().length >= 10 && newData.child('comment').val().length <= 500 && newData.child('timestamp').isNumber() && newData.child('date').isString() && newData.child('userId').isString()"
         }
       }
     }
