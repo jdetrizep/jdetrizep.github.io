@@ -4,6 +4,7 @@
  */
 
 import { ref, set, push, remove, onValue } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js';
+import { getUserId } from '../utils/user-id.js';
 
 export class CommentsStorage {
   /**
@@ -65,17 +66,10 @@ export class CommentsStorage {
   }
 
   /**
-   * Genera o recupera un ID único para el usuario
+   * Obtiene el ID único del usuario
    * @returns {string} ID del usuario
    */
   static getUserId() {
-    let userId = localStorage.getItem('firebase_user_id');
-    
-    if (!userId) {
-      userId = 'user_' + Date.now() + '_' + Math.random().toString(36).substring(2, 11);
-      localStorage.setItem('firebase_user_id', userId);
-    }
-    
-    return userId;
+    return getUserId();
   }
 }

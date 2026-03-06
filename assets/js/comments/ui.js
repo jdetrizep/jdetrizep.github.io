@@ -52,32 +52,51 @@ export class CommentsUI {
    * @param {Function} onDelete - Callback para eliminar
    */
   renderComment(comment, currentUserId, onDelete) {
-    const commentElement = document.createElement('div');
-    commentElement.className = 'comment-item';
-    commentElement.dataset.commentId = comment.id;
-    
-    const date = new Date(comment.timestamp);
-    const formattedDate = CommentsFormatter.formatDate(date);
-    const isOwnComment = comment.userId === currentUserId;
-    
-    // Crear header del comentario
-    const commentHeader = this.createCommentHeader(
-      comment.name,
-      formattedDate,
-      date,
-      isOwnComment,
-      comment.id,
-      comment.userId,
-      onDelete
-    );
-    
-    // Crear body del comentario
-    const commentBody = this.createCommentBody(comment.comment);
-    
-    commentElement.appendChild(commentHeader);
-    commentElement.appendChild(commentBody);
-    
-    this.commentsList.appendChild(commentElement);
+    try {
+      // Validar datos del comentario
+      if (!comment?.id || !comment?.name || !comment?.comment) {
+        console.error('Datos de comentario inválidos:', comment);
+        return;
+      }
+
+      const commentElement = document.createElement('div');
+      commentElement.className = 'comment-item';
+      commentElement.dataset.commentId = comment.id;
+      
+      const date = new Date(comment.timestamp);
+      
+      // Validar fecha
+      if (Number.isNaN(date.getTime())) {
+        console.error('Timestamp inválido:', comment.timestamp);
+        return;
+      }
+      
+      const formattedDate = CommentsFormatter.formatDate(date);
+      const isOwnComment = comment.userId === currentUserId;
+      
+      // Crear header del comentario
+      const commentHeader = this.createCommentHeader(
+        comment.name,
+        formattedDate,
+        date,
+        isOwnComment,
+        comment.id,
+        comment.userId,
+        onDelete
+      );
+      
+      // Crear body del comentario
+      const commentBody = this.createCommentBody(comment.comment);
+      
+      commentElement.appendChild(commentHeader);
+      commentElement.appendChild(commentBody);
+      
+      this.commentsList.appendChild(commentElement);
+    } catch (error) {
+      console.error('Error renderizando comentario:', error);
+      // No mostrar notificación al usuario para no interrumpir la experiencia
+      // El comentario simplemente no se mostrará
+    }
   }
 
   /**
@@ -85,49 +104,58 @@ export class CommentsUI {
    * @private
    */
   createCommentHeader(name, formattedDate, date, isOwnComment, commentId, userId, onDelete) {
-    const commentHeader = document.createElement('div');
-    commentHeader.className = 'comment-header';
-    
-    const commentAuthor = document.createElement('div');
-    commentAuthor.className = 'comment-author';
-    
-    const authorAvatar = document.createElement('span');
-    authorAvatar.className = 'author-avatar';
-    authorAvatar.textContent = name.charAt(0).toUpperCase();
-    
-    const authorName = document.createElement('span');
-    authorName.className = 'author-name';
-    authorName.textContent = name;
-    
-    if (isOwnComment) {
-      const badge = document.createElement('span');
-      badge.className = 'own-comment-badge';
-      badge.textContent = ' (Tú)';
-      authorName.appendChild(badge);
+    try {
+      const commentHeader = document.createElement('div');
+      commentHeader.className = 'comment-header';
+      
+      const commentAuthor = document.createElement('div');
+      commentAuthor.className = 'comment-author';
+      
+      const authorAvatar = document.createElement('span');
+      authorAvatar.className = 'author-avatar';
+      authorAvatar.textContent = name && name.length > 0 ? name.charAt(0).toUpperCase() : '?';
+      
+      const authorName = document.createElement('span');
+      authorName.className = 'author-name';
+      authorName.textContent = name || 'Anónimo';
+      
+      if (isOwnComment) {
+        const badge = document.createElement('span');
+        badge.className = 'own-comment-badge';
+        badge.textContent = ' (Tú)';
+        authorName.appendChild(badge);
+      }
+      
+      commentAuthor.appendChild(authorAvatar);
+      commentAuthor.appendChild(authorName);
+      
+      const commentMeta = document.createElement('div');
+      commentMeta.className = 'comment-meta';
+      
+      const commentDate = document.createElement('span');
+      commentDate.className = 'comment-date';
+      commentDate.textContent = formattedDate;
+      commentDate.title = date.toLocaleString();
+      
+      commentMeta.appendChild(commentDate);
+      
+      if (isOwnComment) {
+        const deleteBtn = this.createDeleteButton(commentId, userId, onDelete);
+        commentMeta.appendChild(deleteBtn);
+      }
+      
+      commentHeader.appendChild(commentAuthor);
+      commentHeader.appendChild(commentMeta);
+      
+      return commentHeader;
+    } catch (error) {
+      console.error('Error creando header de comentario:', error);
+      // Retornar un header básico en caso de error
+      const fallbackHeader = document.createElement('div');
+      fallbackHeader.className = 'comment-header';
+      fallbackHeader.textContent = 'Error al cargar comentario';
+      return fallbackHeader;
     }
-    
-    commentAuthor.appendChild(authorAvatar);
-    commentAuthor.appendChild(authorName);
-    
-    const commentMeta = document.createElement('div');
-    commentMeta.className = 'comment-meta';
-    
-    const commentDate = document.createElement('span');
-    commentDate.className = 'comment-date';
-    commentDate.textContent = formattedDate;
-    commentDate.title = date.toLocaleString();
-    
-    commentMeta.appendChild(commentDate);
-    
-    if (isOwnComment) {
-      const deleteBtn = this.createDeleteButton(commentId, userId, onDelete);
-      commentMeta.appendChild(deleteBtn);
-    }
-    
-    commentHeader.appendChild(commentAuthor);
-    commentHeader.appendChild(commentMeta);
-    
-    return commentHeader;
   }
 
   /**

@@ -4,23 +4,12 @@
  */
 
 // Importar Firebase desde CDN
-import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
-import { getDatabase, ref, set, get, update, push } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js';
+import { ref, set, get } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js';
+import { getFirebaseDatabase } from './firebase-config.js';
+import { getUserId } from './utils/user-id.js';
 
-// Configuración de Firebase
-const firebaseConfig = {
-  apiKey: "AIzaSyA4Dzhnk7-QkknIrQWhMNCC5as1CSs-Y7M",
-  authDomain: "jdetrizep-blog.firebaseapp.com",
-  databaseURL: "https://jdetrizep-blog-default-rtdb.firebaseio.com",
-  projectId: "jdetrizep-blog",
-  storageBucket: "jdetrizep-blog.firebasestorage.app",
-  messagingSenderId: "355885882700",
-  appId: "1:355885882700:web:894592581a7627f4c183e9"
-};
-
-// Inicializar Firebase
-const app = initializeApp(firebaseConfig);
-const database = getDatabase(app);
+// Obtener instancia de Firebase Database
+const database = getFirebaseDatabase();
 
 (function() {
   'use strict';
@@ -31,28 +20,36 @@ const database = getDatabase(app);
       this.container = container;
       this.postId = container.dataset.postId;
       this.stars = container.querySelectorAll('.star');
-      this.ratingValue = container.closest('.rating-widget').querySelector('.rating-value');
-      this.ratingStars = container.closest('.rating-widget').querySelector('.rating-stars');
-      this.ratingCount = container.closest('.rating-widget').querySelector('.count');
-      this.ratingMessage = container.closest('.rating-widget').querySelector('.rating-message');
       
-      // Generar ID único para el usuario (basado en fingerprint del navegador)
-      this.userId = this.getUserId();
-      
-      this.init();
-    }
-
-    getUserId() {
-      // Intentar obtener ID existente
-      let userId = localStorage.getItem('firebase_user_id');
-      
-      if (!userId) {
-        // Generar nuevo ID único
-        userId = 'user_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
-        localStorage.setItem('firebase_user_id', userId);
+      // Validar que el widget existe
+      const widget = container.closest('.rating-widget');
+      if (!widget) {
+        throw new Error('Rating widget container not found');
       }
       
-      return userId;
+      this.ratingValue = widget.querySelector('.rating-value');
+      this.ratingStars = widget.querySelector('.rating-stars');
+      this.ratingCount = widget.querySelector('.count');
+      this.ratingMessage = widget.querySelector('.rating-message');
+      
+      // Validar elementos requeridos
+      if (!this.ratingValue || !this.ratingStars || !this.ratingCount || !this.ratingMessage) {
+        throw new Error('Required rating elements not found in DOM');
+      }
+      
+      // Generar ID único para el usuario (basado en fingerprint del navegador)
+      this.userId = getUserId();
+    }
+
+    /**
+     * Método factory estático para crear e inicializar una instancia
+     * @param {HTMLElement} container - Contenedor de estrellas
+     * @returns {Promise<PostRating>} Instancia inicializada
+     */
+    static async create(container) {
+      const instance = new PostRating(container);
+      await instance.init();
+      return instance;
     }
 
     async init() {
@@ -151,7 +148,7 @@ const database = getDatabase(app);
           // Actualizar estadísticas
           const statsRef = ref(database, `ratings/${this.postId}/stats`);
           await set(statsRef, {
-            average: parseFloat(average),
+            average: Number.parseFloat(average),
             count: ratings.length,
             lastUpdated: Date.now()
           });
@@ -247,12 +244,26 @@ const database = getDatabase(app);
   }
 
   // Inicializar cuando el DOM esté listo
-  function initRatings() {
+  async function initRatings() {
+    // Validar que Firebase esté inicializado
+    if (!database) {
+      console.error('Firebase database not initialized');
+      return;
+    }
+
     const ratingContainers = document.querySelectorAll('.stars-container');
     
-    ratingContainers.forEach(container => {
-      new PostRating(container);
+    // Inicializar todas las instancias de forma asíncrona
+    const initPromises = Array.from(ratingContainers).map(async (container) => {
+      try {
+        await PostRating.create(container);
+      } catch (error) {
+        console.error('Error initializing rating for container:', container, error);
+      }
     });
+
+    // Esperar a que todas las instancias se inicialicen
+    await Promise.all(initPromises);
   }
 
   // Ejecutar cuando el DOM esté listo
@@ -263,7 +274,7 @@ const database = getDatabase(app);
   }
 
   // Función de utilidad para ver todas las calificaciones (consola)
-  window.viewAllRatings = async function() {
+  globalThis.viewAllRatings = async function() {
     try {
       const ratingsRef = ref(database, 'ratings');
       const snapshot = await get(ratingsRef);

@@ -56,6 +56,13 @@
     }
 
     handleRating(value) {
+      // Validar que el valor esté en el rango correcto
+      if (!value || value < 1 || value > 5) {
+        console.error('Valor de calificación inválido:', value);
+        this.showMessage('Calificación inválida. Debe ser entre 1 y 5 estrellas', 'error');
+        return;
+      }
+
       // Verificar si ya calificó
       const userRating = localStorage.getItem(this.storageKey);
       
@@ -127,7 +134,7 @@
       const ratings = this.getRatings();
       
       this.ratingValue.textContent = average;
-      this.ratingStars.textContent = this.getStarsDisplay(parseFloat(average));
+      this.ratingStars.textContent = this.getStarsDisplay(Number.parseFloat(average));
       this.ratingCount.textContent = ratings.length;
     }
 
@@ -135,7 +142,7 @@
       const userRating = localStorage.getItem(this.storageKey);
       
       if (userRating) {
-        const value = parseInt(userRating);
+        const value = Number.parseInt(userRating, 10);
         
         // Marcar las estrellas como calificadas
         this.stars.forEach((star, i) => {
