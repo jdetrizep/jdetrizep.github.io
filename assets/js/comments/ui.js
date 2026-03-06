@@ -193,21 +193,26 @@ export class CommentsUI {
   }
 
   /**
-   * Establece el estado de carga del botón
+   * Activa el estado de carga del botón
    * @param {HTMLElement} submitBtn - Botón de envío
    * @param {HTMLElement} btnText - Texto del botón
    * @param {HTMLElement} btnLoading - Indicador de carga
-   * @param {boolean} loading - Si está cargando
    */
-  static setLoadingState(submitBtn, btnText, btnLoading, loading) {
-    if (loading) {
-      submitBtn.disabled = true;
-      btnText.style.display = 'none';
-      btnLoading.style.display = 'inline';
-    } else {
-      submitBtn.disabled = false;
-      btnText.style.display = 'inline';
-      btnLoading.style.display = 'none';
-    }
+  static enableLoadingState(submitBtn, btnText, btnLoading) {
+    submitBtn.disabled = true;
+    btnText.style.display = 'none';
+    btnLoading.style.display = 'inline';
+  }
+
+  /**
+   * Desactiva el estado de carga del botón
+   * @param {HTMLElement} submitBtn - Botón de envío
+   * @param {HTMLElement} btnText - Texto del botón
+   * @param {HTMLElement} btnLoading - Indicador de carga
+   */
+  static disableLoadingState(submitBtn, btnText, btnLoading) {
+    submitBtn.disabled = false;
+    btnText.style.display = 'inline';
+    btnLoading.style.display = 'none';
   }
 }

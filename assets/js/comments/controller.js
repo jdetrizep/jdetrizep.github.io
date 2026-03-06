@@ -204,11 +204,18 @@ export class CommentsController {
    * Establece el estado de carga
    */
   setLoading(loading) {
-    CommentsUI.setLoadingState(
-      this.submitBtn,
-      this.btnText,
-      this.btnLoading,
-      loading
-    );
+    if (loading) {
+      CommentsUI.enableLoadingState(
+        this.submitBtn,
+        this.btnText,
+        this.btnLoading
+      );
+    } else {
+      CommentsUI.disableLoadingState(
+        this.submitBtn,
+        this.btnText,
+        this.btnLoading
+      );
+    }
   }
 }
