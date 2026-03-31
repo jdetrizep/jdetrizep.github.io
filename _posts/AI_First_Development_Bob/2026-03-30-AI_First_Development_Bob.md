@@ -42,7 +42,7 @@ Esto cambia completamente la forma en que interactuamos con la IA dentro del des
 En lugar de pedir código aislado, podemos pedirle a la IA que **analice el sistema, identifique problemas y proponga soluciones arquitectónicas**.
 
 <figure>
-<img src="./Evolución_Desarrollo_Con_AI.png" alt="Evolución del desarrollo de software con AI." loading="lazy" />
+<img src="./Evolución_Desarrollo_Con_AI.png" alt="Evolución del desarrollo de software con AI." loading="lazy" />
 <figcaption>Fig 1. Evolución del desarrollo de software con AI.</figcaption>
 </figure>
 
