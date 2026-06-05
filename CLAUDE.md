@@ -55,6 +55,20 @@ El `postId` que enlaza un post con sus datos en Firebase es `{{ page.id | slugif
 
 Si cambias la forma de los datos en el JS (campos, longitudes, límites de estrellas), **debes** actualizar estas reglas en paralelo o las escrituras serán rechazadas. Despliegue y verificación documentados en `DESPLEGAR_REGLAS_FIREBASE.md`, `FIREBASE_SECURITY.md` y `VERIFICAR_SEGURIDAD_FIREBASE.md`.
 
+## Multi-idioma / i18n (jekyll-polyglot)
+
+El sitio es bilingüe **español (canónico) + inglés** con el plugin `jekyll-polyglot` (habilitado porque el build corre en CI, no con el gem `github-pages`). Config en [_config.yml](_config.yml): `languages: ["es", "en"]`, `default_lang: "es"`.
+
+- **URLs**: español en la raíz (`/mi-post/`), inglés bajo `/en/` (`/en/my-post/`). Polyglot construye el sitio **una vez por idioma** (el build tarda ~2×).
+- **Fallback**: un post solo en español (sin contraparte `en`) aparece igual en `/en/` con su contenido español. Por eso el sitio inglés nunca queda vacío.
+- **Todo post/página debe llevar `lang:` en el front matter** (`lang: es` o `lang: en`). Los 30 posts iniciales están en `lang: es`. Al crear un post nuevo, **añade `lang: es`**.
+- **Strings de UI**: NO hardcodear texto visible en layouts/includes. Viven en [_data/es/strings.yml](_data/es/strings.yml) y [_data/en/strings.yml](_data/en/strings.yml) (mismas claves) y se usan con `{% assign t = site.data[site.active_lang].strings %}` → `{{ t.seccion.clave }}`. El menú ([_data/menus.yml](_data/menus.yml)) referencia claves `nav.*`.
+- **`hreflang` y selector de idioma**: polyglot **reescribe automáticamente las URLs dentro de atributos `href`/`src`** para anteponer el idioma activo (no toca `content=`). Para enlaces que NO deben prefijarse (hreflang, selector ES|EN) hay que envolver el atributo en `{% static_href %}href="..."{% endstatic_href %}` — es un **bloque** (cierra con `endstatic_href`, no es un toggle). Ver [_includes/header.html](_includes/header.html) y [_includes/navbar.html](_includes/navbar.html).
+- **`<html lang>`** usa `site.active_lang` (en [_layouts/default.html](_layouts/default.html), `page.html`, `post.html`).
+- **Comentarios/ratings se separan por idioma**: como el `postId` es `page.id | slugify`, una traducción en archivo aparte (otro slug) tiene su propio hilo y estrellas. Los posts en fallback (mismo archivo) los comparten.
+- **Pendiente**: los textos generados por **JavaScript** (notificaciones, validaciones, fechas relativas en `assets/js/comments/` y `rating-firebase.js`) aún no se internacionalizan; siguen en español en ambos idiomas.
+- **Trade-off de tamaño**: el fallback duplica las imágenes co-localizadas bajo `/en/` (el `_site` pasa de ~256 MB a ~513 MB). Vigilar si se acerca al tope de GitHub Pages (~1 GB).
+
 ## Gotcha: nombres de archivo con acentos (macOS + Git)
 
 Varios assets de posts tienen tildes (p. ej. `Evolución_...png`). macOS guarda los nombres en Unicode **NFD** (descompuesto) mientras que Git/GitHub suelen usar **NFC** (precompuesto). Subir o renombrar imágenes desde la **interfaz web de GitHub** puede crear una entrada duplicada del mismo archivo bajo ambas normalizaciones, lo que rompe `pull`/`rebase`/`merge` en macOS con *"untracked working tree files would be overwritten"*. **Sube y renombra las imágenes desde el Git local**, no desde la web, para evitarlo.
