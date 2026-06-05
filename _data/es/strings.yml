@@ -36,3 +36,19 @@ comments:
 
 footer:
   tagline: "Blog de Desarrollador"
+
+archive:
+  search_placeholder: "Encuentre algunos artículos aquí"
+
+tags:
+  intro: "Explora los artículos por tema. Haz clic en cualquier tag para ver todos los posts relacionados."
+
+search:
+  notice_title: "🔍 Búsqueda Temporalmente Deshabilitada"
+  notice_p1: "Estamos trabajando en mejorar la funcionalidad de búsqueda."
+  notice_p2: "Mientras tanto, puedes explorar el contenido a través de:"
+  link_archive: "📚 Archivo de Posts"
+  link_tags: "🏷️ Tags"
+
+author:
+  bio: "Experto en desarrollo de sistemas bancarios con +18 años de experiencia. Especializado en tecnologías móviles, backend y sistemas IBM i. <br> <strong> IBM Champion 2026 | IBM Influencer 2025 | IBM Advocate 2025 | IBM Contributor 2025 </strong> | Microsoft Certified Professional | Oracle Cloud Certified AI | Cybersecurity Awareness Professional | Lean Six Sigma White Belt | Certified Scrum Master | IBM Enterprise Design Thinking."

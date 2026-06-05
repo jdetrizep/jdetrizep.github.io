@@ -5,13 +5,14 @@ permalink: /search/
 ---
 
 <div class="search-container">
+  {%- assign t = site.data[site.active_lang].strings -%}
   <div class="search-notice">
-    <h2>🔍 Búsqueda Temporalmente Deshabilitada</h2>
-    <p>Estamos trabajando en mejorar la funcionalidad de búsqueda.</p>
-    <p>Mientras tanto, puedes explorar el contenido a través de:</p>
+    <h2>{{ t.search.notice_title }}</h2>
+    <p>{{ t.search.notice_p1 }}</p>
+    <p>{{ t.search.notice_p2 }}</p>
     <ul>
-      <li><a href="/archive/">📚 Archivo de Posts</a></li>
-      <li><a href="/tags/">🏷️ Tags</a></li>
+      <li><a href="/archive/">{{ t.search.link_archive }}</a></li>
+      <li><a href="/tags/">{{ t.search.link_tags }}</a></li>
     </ul>
   </div>
 </div>

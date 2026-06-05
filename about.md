@@ -1,4 +1,5 @@
 ---
+lang: es
 title: Jorge De Trinidad Zepeda
 permalink: /about/
 layout: pageAbout
