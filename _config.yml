@@ -42,8 +42,9 @@ languages: ["es", "en"]
 default_lang: "es"
 # Carpetas/archivos de raíz que NO se duplican por idioma (recursos compartidos)
 exclude_from_localization: ["assets", "robots.txt", "browserconfig.xml", "now.json"]
-# Construye los idiomas en paralelo; si el build de CI falla, poner en false
-parallel_localization: true
+# Construir idiomas en serie: parallel_localization=true provoca carreras en
+# .jekyll-cache entre subprocesos. En serie el build es determinista.
+parallel_localization: false
 
 # Collection setting
 collections:
