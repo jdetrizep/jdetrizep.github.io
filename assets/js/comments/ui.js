@@ -5,6 +5,7 @@
 
 import { CommentsFormatter } from './formatter.js';
 import { CommentsSanitizer } from './sanitizer.js';
+import { I18N } from '../i18n.js';
 
 export class CommentsUI {
   static HIGHLIGHT_DURATION = 2000;
@@ -117,12 +118,12 @@ export class CommentsUI {
       
       const authorName = document.createElement('span');
       authorName.className = 'author-name';
-      authorName.textContent = name || 'Anónimo';
-      
+      authorName.textContent = name || I18N.comments.anonymous;
+
       if (isOwnComment) {
         const badge = document.createElement('span');
         badge.className = 'own-comment-badge';
-        badge.textContent = ' (Tú)';
+        badge.textContent = I18N.comments.you;
         authorName.appendChild(badge);
       }
       
@@ -182,7 +183,7 @@ export class CommentsUI {
     const button = document.createElement('button');
     button.className = 'delete-comment-btn';
     button.dataset.commentId = commentId;
-    button.title = 'Eliminar mi comentario';
+    button.title = I18N.comments.deleteOwn;
     
     button.innerHTML = `
       <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">

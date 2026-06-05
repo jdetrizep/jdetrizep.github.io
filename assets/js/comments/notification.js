@@ -3,6 +3,8 @@
  * Responsable de mostrar mensajes al usuario
  */
 
+import { I18N } from '../i18n.js';
+
 export class CommentsNotification {
   static DISPLAY_DURATION = 3000;
   static ANIMATION_DELAY = 10;
@@ -41,11 +43,11 @@ export class CommentsNotification {
     modal.innerHTML = `
       <div class="delete-modal">
         <div class="delete-modal-icon">⚠️</div>
-        <h3 class="delete-modal-title">¿Eliminar comentario?</h3>
-        <p class="delete-modal-message">Esta acción no se puede deshacer</p>
+        <h3 class="delete-modal-title">${I18N.comments.deleteTitle}</h3>
+        <p class="delete-modal-message">${I18N.comments.deleteMessage}</p>
         <div class="delete-modal-buttons">
-          <button class="delete-modal-cancel">Cancelar</button>
-          <button class="delete-modal-confirm">Eliminar</button>
+          <button class="delete-modal-cancel">${I18N.comments.cancel}</button>
+          <button class="delete-modal-confirm">${I18N.comments.confirm}</button>
         </div>
       </div>
     `;

@@ -3,6 +3,8 @@
  * Responsable de formatear fechas de forma legible
  */
 
+import { I18N } from '../i18n.js';
+
 export class CommentsFormatter {
   static MINUTE_MS = 60000;
   static HOUR_MS = 3600000;
@@ -21,15 +23,15 @@ export class CommentsFormatter {
     const hours = Math.floor(diff / this.HOUR_MS);
     const days = Math.floor(diff / this.DAY_MS);
     
-    if (minutes < 1) return 'Hace un momento';
-    if (minutes < 60) return `Hace ${minutes} minuto${minutes > 1 ? 's' : ''}`;
-    if (hours < 24) return `Hace ${hours} hora${hours > 1 ? 's' : ''}`;
-    if (days < 7) return `Hace ${days} día${days > 1 ? 's' : ''}`;
-    
-    return date.toLocaleDateString('es-ES', { 
-      year: 'numeric', 
-      month: 'short', 
-      day: 'numeric' 
+    if (minutes < 1) return I18N.date.justNow;
+    if (minutes < 60) return I18N.date.minutes(minutes);
+    if (hours < 24) return I18N.date.hours(hours);
+    if (days < 7) return I18N.date.days(days);
+
+    return date.toLocaleDateString(I18N.date.locale, {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric'
     });
   }
 

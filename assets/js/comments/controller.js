@@ -8,6 +8,7 @@ import { CommentsValidator } from './validator.js';
 import { CommentsSanitizer } from './sanitizer.js';
 import { CommentsNotification } from './notification.js';
 import { CommentsUI } from './ui.js';
+import { I18N } from '../i18n.js';
 
 export class CommentsController {
   /**
@@ -116,14 +117,14 @@ export class CommentsController {
       this.setLoading(false);
       
       // Mostrar notificación
-      CommentsNotification.show('¡Comentario publicado exitosamente!', 'success');
+      CommentsNotification.show(I18N.comments.published, 'success');
       
       // Scroll al nuevo comentario
       this.ui.scrollToLatest();
     } catch (error) {
       console.error('Error al guardar comentario:', error);
       this.setLoading(false);
-      CommentsNotification.show('Error al publicar el comentario. Intenta de nuevo.', 'error');
+      CommentsNotification.show(I18N.comments.publishError, 'error');
     }
   }
 
@@ -168,7 +169,7 @@ export class CommentsController {
    */
   handleCommentsError(error) {
     console.error('Error cargando comentarios:', error);
-    CommentsNotification.show('Error al cargar comentarios', 'error');
+    CommentsNotification.show(I18N.comments.loadError, 'error');
   }
 
   /**
@@ -177,7 +178,7 @@ export class CommentsController {
   handleDelete(commentId, commentUserId) {
     // Verificar permisos
     if (!CommentsValidator.canDelete(commentUserId, this.userId)) {
-      CommentsNotification.show('Solo puedes eliminar tus propios comentarios', 'error');
+      CommentsNotification.show(I18N.comments.onlyOwn, 'error');
       return;
     }
     
@@ -193,10 +194,10 @@ export class CommentsController {
   async performDelete(commentId) {
     try {
       await this.storage.deleteComment(commentId);
-      CommentsNotification.show('Comentario eliminado', 'info');
+      CommentsNotification.show(I18N.comments.deleted, 'info');
     } catch (error) {
       console.error('Error al eliminar comentario:', error);
-      CommentsNotification.show('Error al eliminar el comentario', 'error');
+      CommentsNotification.show(I18N.comments.deleteError, 'error');
     }
   }
 

@@ -7,6 +7,7 @@
 import { ref, set, get } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js';
 import { getFirebaseDatabase } from './firebase-config.js';
 import { getUserId } from './utils/user-id.js';
+import { I18N } from './i18n.js';
 
 // Obtener instancia de Firebase Database
 const database = getFirebaseDatabase();
@@ -71,7 +72,7 @@ const database = getFirebaseDatabase();
         await this.checkUserRating();
       } catch (error) {
         console.error('Error inicializando calificaciones:', error);
-        this.showMessage('Error al cargar calificaciones', 'warning');
+        this.showMessage(I18N.rating.loadError, 'warning');
       }
     }
 
@@ -96,7 +97,7 @@ const database = getFirebaseDatabase();
         const snapshot = await get(userRatingRef);
         
         if (snapshot.exists()) {
-          this.showMessage('Ya has calificado este artículo anteriormente', 'warning');
+          this.showMessage(I18N.rating.already, 'warning');
           return;
         }
 
@@ -124,13 +125,13 @@ const database = getFirebaseDatabase();
         });
 
         // Mostrar mensaje de agradecimiento
-        this.showMessage('¡Gracias por tu calificación!', 'success');
+        this.showMessage(I18N.rating.thanks, 'success');
 
         // Deshabilitar más clics
         this.container.style.pointerEvents = 'none';
       } catch (error) {
         console.error('Error guardando calificación:', error);
-        this.showMessage('Error al guardar calificación. Intenta de nuevo.', 'warning');
+        this.showMessage(I18N.rating.saveError, 'warning');
       }
     }
 
@@ -213,7 +214,7 @@ const database = getFirebaseDatabase();
           this.container.style.pointerEvents = 'none';
           
           // Mostrar mensaje informativo
-          this.showMessage(`Tu calificación: ${value} estrella${value > 1 ? 's' : ''}`, 'info');
+          this.showMessage(I18N.rating.yours(value), 'info');
         }
       } catch (error) {
         console.error('Error verificando calificación del usuario:', error);

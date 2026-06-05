@@ -3,6 +3,8 @@
  * Responsable de validar entradas del usuario
  */
 
+import { I18N } from '../i18n.js';
+
 export class CommentsValidator {
   static MIN_NAME_LENGTH = 2;
   static MIN_COMMENT_LENGTH = 10;
@@ -19,7 +21,7 @@ export class CommentsValidator {
     if (!name || !comment) {
       return {
         valid: false,
-        error: 'Por favor completa todos los campos'
+        error: I18N.comments.allFields
       };
     }
 
@@ -27,7 +29,7 @@ export class CommentsValidator {
     if (name.length < this.MIN_NAME_LENGTH) {
       return {
         valid: false,
-        error: `El nombre debe tener al menos ${this.MIN_NAME_LENGTH} caracteres`
+        error: I18N.comments.nameMin(this.MIN_NAME_LENGTH)
       };
     }
 
@@ -35,7 +37,7 @@ export class CommentsValidator {
     if (comment.length < this.MIN_COMMENT_LENGTH) {
       return {
         valid: false,
-        error: `El comentario debe tener al menos ${this.MIN_COMMENT_LENGTH} caracteres`
+        error: I18N.comments.commentMin(this.MIN_COMMENT_LENGTH)
       };
     }
 
@@ -43,7 +45,7 @@ export class CommentsValidator {
     if (comment.length > this.MAX_COMMENT_LENGTH) {
       return {
         valid: false,
-        error: `El comentario no puede exceder ${this.MAX_COMMENT_LENGTH} caracteres`
+        error: I18N.comments.commentMax(this.MAX_COMMENT_LENGTH)
       };
     }
 
