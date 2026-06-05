@@ -1,4 +1,5 @@
 ---
+lang: es
 layout: post
 title: Gobernanza como pilar de la IA
 date: 2025-09-19 08:00

@@ -163,28 +163,42 @@
       <div class="trigger-container">
         {%- assign url = page.url -%}
         {%- assign menus = site.data.menus -%}
+        {%- assign t = site.data[site.active_lang].strings -%}
         {%- if menus %}
-          {%- for menu in menus -%} 
+          {%- for menu in menus -%}
             {%- if url == menu.url -%}
-              <a class="menu-link active" href="{{ menu.url }}">{{ menu.title }}</a>
-            {%- else -%} 
+              <a class="menu-link active" href="{{ menu.url }}">{{ t.nav[menu.key] }}</a>
+            {%- else -%}
               {%- if menu.external -%}
                 <a
                   class="menu-link"
                   href="{{ menu.url }}"
                   target="_blank"
                   rel="noopener"
-                  >{{ menu.title }}</a
+                  >{{ t.nav[menu.key] }}</a
                 >
               {%- else -%}
-                <a class="menu-link" href="{{ menu.url }}">{{ menu.title }}</a>
-              {%- endif -%} 
-            {%- endif -%} 
+                <a class="menu-link" href="{{ menu.url }}">{{ t.nav[menu.key] }}</a>
+              {%- endif -%}
+            {%- endif -%}
           {%- endfor -%}
         {%- else -%}
           <a class="menu-link {% if url == '/' %}active{% endif %}" href="/">home</a>
           <a class="menu-link {% if url == '/about/' %}active{% endif %}" href="/about">about</a>
         {%- endif -%}
+
+        {%- comment -%} Selector de idioma ES | EN. static_href evita que polyglot
+        reescriba estos enlaces con el prefijo del idioma activo. {%- endcomment -%}
+        <span class="lang-switcher">
+          {%- for lang in site.languages -%}
+            {%- if lang == site.default_lang -%}
+              {%- capture lhref %}{{ site.baseurl }}{{ page.url }}{% endcapture -%}
+            {%- else -%}
+              {%- capture lhref %}{{ site.baseurl }}/{{ lang }}{{ page.url }}{% endcapture -%}
+            {%- endif -%}
+            <a class="menu-link lang-link{% if lang == site.active_lang %} active{% endif %}" {% static_href %}href="{{ lhref }}"{% endstatic_href %}>{{ lang | upcase }}</a>
+          {%- endfor -%}
+        </span>
       </nav>
     </div>
   </nav>

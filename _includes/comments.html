@@ -1,42 +1,43 @@
 <!-- Sistema de Comentarios -->
+{%- assign t = site.data[site.active_lang].strings -%}
 <div class="comments-section">
   <div class="comments-header">
-    <h3>💬 Comentarios</h3>
-    <p class="comments-count"><span class="count">0</span> comentario(s)</p>
+    <h3>{{ t.comments.heading }}</h3>
+    <p class="comments-count"><span class="count">0</span> {{ t.comments.count_suffix }}</p>
   </div>
 
   <!-- Formulario para agregar comentarios -->
   <div class="comment-form-container">
-    <h4>Deja tu comentario</h4>
+    <h4>{{ t.comments.form_title }}</h4>
     <form class="comment-form" data-post-id="{{ page.id | slugify }}">
       <div class="form-group">
-        <label for="comment-name">Nombre *</label>
-        <input 
-          type="text" 
-          id="comment-name" 
-          name="name" 
-          placeholder="Tu nombre" 
-          required 
+        <label for="comment-name">{{ t.comments.name_label }}</label>
+        <input
+          type="text"
+          id="comment-name"
+          name="name"
+          placeholder="{{ t.comments.name_placeholder }}"
+          required
           maxlength="50"
         >
       </div>
-      
+
       <div class="form-group">
-        <label for="comment-text">Comentario *</label>
-        <textarea 
-          id="comment-text" 
-          name="comment" 
-          placeholder="Escribe tu comentario aquí..." 
-          required 
+        <label for="comment-text">{{ t.comments.text_label }}</label>
+        <textarea
+          id="comment-text"
+          name="comment"
+          placeholder="{{ t.comments.text_placeholder }}"
+          required
           maxlength="500"
           rows="4"
         ></textarea>
-        <small class="char-count"><span class="current">0</span>/500 caracteres</small>
+        <small class="char-count"><span class="current">0</span>/500 {{ t.comments.chars_suffix }}</small>
       </div>
-      
+
       <button type="submit" class="submit-comment-btn">
-        <span class="btn-text">Publicar Comentario</span>
-        <span class="btn-loading" style="display: none;">Publicando...</span>
+        <span class="btn-text">{{ t.comments.submit }}</span>
+        <span class="btn-loading" style="display: none;">{{ t.comments.submitting }}</span>
       </button>
     </form>
   </div>
@@ -44,7 +45,7 @@
   <!-- Lista de comentarios -->
   <div class="comments-list">
     <div class="no-comments" style="display: none;">
-      <p>Sé el primero en comentar este artículo 🎉</p>
+      <p>{{ t.comments.empty }}</p>
     </div>
     <!-- Los comentarios se cargarán aquí dinámicamente -->
   </div>

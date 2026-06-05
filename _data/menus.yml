@@ -1,16 +1,17 @@
-- title: Principal
+# El texto visible de cada entrada sale de _data/<lang>/strings.yml (clave nav.<key>),
+# por lo que el menú se traduce automáticamente según el idioma activo.
+- key: home
   url: /
   external: false
 
-- title: Blogs
+- key: blogs
   url: /archive/
   external: false
 
-- title: Tags
+- key: tags
   url: /tags/
   external: false
 
-- title: Acerca de
+- key: about
   url: /about/
   external: false
-  

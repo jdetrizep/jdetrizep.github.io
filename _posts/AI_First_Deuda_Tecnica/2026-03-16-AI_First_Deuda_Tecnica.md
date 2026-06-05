@@ -1,4 +1,5 @@
 ---
+lang: es
 layout: post
 title: AI-First en la deuda técnica - ¿aliado o enemigo?
 date: 2026-03-16 05:00

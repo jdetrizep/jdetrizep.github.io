@@ -1,4 +1,5 @@
 ---
+lang: es
 layout: post
 title: Manejo Profesional de Errores SQL en IBM i
 date: 2025-12-03 08:00

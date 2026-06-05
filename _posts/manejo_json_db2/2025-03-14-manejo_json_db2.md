@@ -1,4 +1,5 @@
 ---
+lang: es
 layout: post
 title: Manejo de JSON con DB2
 date: 2025-03-15 15:00

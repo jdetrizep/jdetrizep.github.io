@@ -1,4 +1,5 @@
 ---
+lang: es
 layout: post
 title: AI-First en SDLC del código a la orquestación y de la operación
 date: 2026-05-11 05:00

@@ -35,6 +35,16 @@ permalink: /:title/
 google_analytics: G-KQCBK0PDYH # leave it blank if not wish
 fb_appid:
 
+# i18n / multi-idioma (jekyll-polyglot)
+# Español en la raíz (/) e inglés bajo /en/. Los posts sin versión en inglés
+# caen automáticamente al contenido en español (default_lang) en el sitio /en/.
+languages: ["es", "en"]
+default_lang: "es"
+# Carpetas/archivos de raíz que NO se duplican por idioma (recursos compartidos)
+exclude_from_localization: ["assets", "robots.txt", "browserconfig.xml", "now.json"]
+# Construye los idiomas en paralelo; si el build de CI falla, poner en false
+parallel_localization: true
+
 # Collection setting
 collections:
   posts:
@@ -97,3 +107,4 @@ plugins:
   - jekyll-feed
   - jekyll-sitemap
   - jekyll-postfiles
+  - jekyll-polyglot

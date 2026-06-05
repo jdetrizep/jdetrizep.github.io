@@ -1,4 +1,5 @@
 ---
+lang: es
 layout: post
 title: Escribe SQL de alta calidad en IBM i
 date: 2025-06-10 08:00

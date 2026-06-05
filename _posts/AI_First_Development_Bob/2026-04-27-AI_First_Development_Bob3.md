@@ -1,4 +1,5 @@
 ---
+lang: es
 layout: post
 title: AI-First Development con IBM Bob Parte III
 date: 2026-04-27 05:00

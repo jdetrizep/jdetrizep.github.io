@@ -1,4 +1,5 @@
 ---
+lang: es
 layout: post
 title: "AI-First en la Gestión de Proyectos: cuando la IA se sienta en el equipo"
 date: 2026-06-09 05:00

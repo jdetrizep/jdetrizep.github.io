@@ -1,4 +1,5 @@
 ---
+lang: es
 layout: post
 title: De Watsonx Code Assistant a Project Bob
 date: 2025-10-13 08:00

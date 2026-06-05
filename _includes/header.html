@@ -11,13 +11,17 @@
     {% if page.title %}{{ page.title | escape }} - {{ site.title }}{% else %}{{
     site.title | escape }}{% endif %}
   </title>
-  <link
-    rel="alternate"
-    href="{{
-      page.url | remove: 'index.html' | remove: '.html' | absolute_url
-    }}"
-    hreflang="{{ site.lang }}"
-  />
+  {%- comment -%} hreflang alternates por idioma (jekyll-polyglot). static_href evita
+  que polyglot reescriba/prefije estas URLs con el idioma activo. {%- endcomment -%}
+  {%- for lang in site.languages -%}
+    {%- if lang == site.default_lang -%}
+      {%- capture lang_href %}{{ site.url }}{{ site.baseurl }}{{ page.url }}{% endcapture -%}
+    {%- else -%}
+      {%- capture lang_href %}{{ site.url }}{{ site.baseurl }}/{{ lang }}{{ page.url }}{% endcapture -%}
+    {%- endif -%}
+    <link rel="alternate" hreflang="{{ lang }}" {% static_href %}href="{{ lang_href }}"{% endstatic_href %} />
+  {%- endfor -%}
+  <link rel="alternate" hreflang="x-default" {% static_href %}href="{{ site.url }}{{ site.baseurl }}{{ page.url }}"{% endstatic_href %} />
   <link
     rel="canonical"
     href="{{
@@ -103,7 +107,7 @@
   {% endif %}
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
-  <meta property="og:locale" content="es_CR" />
+  <meta property="og:locale" content="{% if site.active_lang == 'en' %}en_US{% else %}es_CR{% endif %}" />
   {% if page.date %}
   <meta property="article:published_time" content="{{ page.date | date_to_xmlschema }}" />
   {% endif %}

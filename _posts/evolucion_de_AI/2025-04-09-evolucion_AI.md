@@ -1,4 +1,5 @@
 ---
+lang: es
 layout: post
 title: La evolución de la Inteligencia Artificial
 date: 2025-04-09 08:00

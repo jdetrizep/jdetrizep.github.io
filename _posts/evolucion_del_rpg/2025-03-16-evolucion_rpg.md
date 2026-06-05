@@ -1,4 +1,5 @@
 ---
+lang: es
 layout: post
 title: La Evolución del RPG
 date: 2025-03-23 15:00

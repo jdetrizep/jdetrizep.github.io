@@ -3,7 +3,7 @@ layout: compress
 ---
 
 <!DOCTYPE html>
-<html lang="{{ page.lang | default: site.lang | default: "en" }}">
+<html lang="{{ site.active_lang | default: page.lang | default: site.default_lang | default: 'es' }}">
 
 <head>
   <title>{{ page.title | escape }}</title>
@@ -88,7 +88,7 @@ layout: compress
     </main>
 
     {% if page.modified %}
-      <small class="post-updated-at">updated_at {{page.modified | date: "%d-%m-%Y"}}</small>
+      <small class="post-updated-at">{{ site.data[site.active_lang].strings.post.updated_at }} {{page.modified | date: "%d-%m-%Y"}}</small>
     {% endif %}
     {% if page.next or page.previous %}
       {% include navigation.html %}

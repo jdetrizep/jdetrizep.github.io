@@ -1,4 +1,5 @@
 ---
+lang: es
 layout: post
 title: Entiende lo que tu SQL realmente está haciendo
 date: 2025-07-01 08:00

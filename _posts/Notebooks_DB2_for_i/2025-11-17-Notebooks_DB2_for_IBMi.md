@@ -1,4 +1,5 @@
 ---
+lang: es
 layout: post
 title: Notebooks en DB2 for i
 date: 2025-11-27 08:00

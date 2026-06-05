@@ -1,8 +1,9 @@
 <!-- Sistema de Calificación de Estrellas -->
+{%- assign t = site.data[site.active_lang].strings -%}
 <div class="post-rating-container">
   <div class="rating-header">
-    <h3>¿Te gustó este artículo?</h3>
-    <p>Califica de 1 a 5 estrellas</p>
+    <h3>{{ t.rating.question }}</h3>
+    <p>{{ t.rating.hint }}</p>
   </div>
   
   <div class="rating-widget">
@@ -20,12 +21,12 @@
         <span class="rating-stars">☆☆☆☆☆</span>
       </div>
       <div class="rating-count">
-        <span class="count">0</span> calificaciones
+        <span class="count">0</span> {{ t.rating.count }}
       </div>
     </div>
-    
+
     <div class="rating-message" style="display: none;">
-      ¡Gracias por tu calificación!
+      {{ t.rating.thanks }}
     </div>
   </div>
 </div>

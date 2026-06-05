@@ -1,4 +1,5 @@
 ---
+lang: es
 layout: post
 title: AI-First dentro del SDLC Parte III
 date: 2026-02-23 05:00

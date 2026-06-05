@@ -1,4 +1,5 @@
 ---
+lang: es
 layout: post
 title: AI-First el futuro del desarrollo de software
 date: 2026-01-02 08:00

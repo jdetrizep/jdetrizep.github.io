@@ -1,4 +1,5 @@
 ---
+lang: es
 layout: post
 title: Fortaleciendo la Integración Continua con Hard Code Check
 date: 2025-05-26 08:00

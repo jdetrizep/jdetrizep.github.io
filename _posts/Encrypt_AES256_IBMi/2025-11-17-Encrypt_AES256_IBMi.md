@@ -1,4 +1,5 @@
 ---
+lang: es
 layout: post
 title: Protegiendo datos sensibles en IBM i
 date: 2025-11-18 08:00

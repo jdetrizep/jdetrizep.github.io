@@ -1,0 +1,38 @@
+# Cadenas de interfaz en español. Acceso: site.data[site.active_lang].strings.<clave>
+# La versión inglesa equivalente está en _data/en/strings.yml (mismas claves).
+
+nav:
+  home: "Principal"
+  blogs: "Blogs"
+  tags: "Tags"
+  about: "Acerca de"
+
+home:
+  recent_posts: "Blogs Recientes"
+
+post:
+  prev: "Anterior"
+  next: "Siguiente"
+  updated_at: "actualizado el"
+
+rating:
+  question: "¿Te gustó este artículo?"
+  hint: "Califica de 1 a 5 estrellas"
+  count: "calificaciones"
+  thanks: "¡Gracias por tu calificación!"
+
+comments:
+  heading: "💬 Comentarios"
+  count_suffix: "comentario(s)"
+  form_title: "Deja tu comentario"
+  name_label: "Nombre *"
+  name_placeholder: "Tu nombre"
+  text_label: "Comentario *"
+  text_placeholder: "Escribe tu comentario aquí..."
+  chars_suffix: "caracteres"
+  submit: "Publicar Comentario"
+  submitting: "Publicando..."
+  empty: "Sé el primero en comentar este artículo 🎉"
+
+footer:
+  tagline: "Blog de Desarrollador"

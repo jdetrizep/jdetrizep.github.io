@@ -1,4 +1,5 @@
 ---
+lang: es
 layout: post
 title: Project BOB y el enfoque AI-First
 date: 2025-12-23 08:00

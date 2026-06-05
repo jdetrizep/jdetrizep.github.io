@@ -3,7 +3,8 @@ layout: default
 home: true
 ---
 
-<h3 class="posts-item-note" aria-label="Recent Posts">Blogs Recientes</h3>
+{%- assign t = site.data[site.active_lang].strings -%}
+<h3 class="posts-item-note" aria-label="Recent Posts">{{ t.home.recent_posts }}</h3>
 {%- for post in site.posts limit: site.number_of_posts -%}
 <article class="post-item">
   <span class="post-item-date">{{ post.date | date: "%b %d, %Y" }}</span>

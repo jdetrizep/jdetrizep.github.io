@@ -1,4 +1,5 @@
 ---
+lang: es
 layout: post
 title: Optimización del CI en IBMi con Full Free
 date: 2025-03-09 15:00 -0600

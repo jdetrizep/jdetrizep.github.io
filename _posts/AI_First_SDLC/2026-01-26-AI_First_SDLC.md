@@ -1,4 +1,5 @@
 ---
+lang: es
 layout: post
 title: AI-First dentro del SDLC
 date: 2026-01-26 05:00

@@ -1,4 +1,5 @@
 ---
+lang: es
 layout: post
 title: DELETE WHERE EXISTS en Db2 for i
 date: 2025-08-15 08:00

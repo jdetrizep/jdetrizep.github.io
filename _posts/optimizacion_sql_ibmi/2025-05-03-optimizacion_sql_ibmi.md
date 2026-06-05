@@ -1,4 +1,5 @@
 ---
+lang: es
 layout: post
 title: Optimización del rendimiento de SQL en IBM i
 date: 2025-05-05 08:00

@@ -1,4 +1,5 @@
 ---
+lang: es
 layout: post
 title: Asistentes Inteligentes para IBM i
 date: 2025-06-08 08:00

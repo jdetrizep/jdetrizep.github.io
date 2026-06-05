@@ -1,0 +1,38 @@
+# English UI strings. Access: site.data[site.active_lang].strings.<key>
+# The Spanish equivalent lives in _data/es/strings.yml (same keys).
+
+nav:
+  home: "Home"
+  blogs: "Blog"
+  tags: "Tags"
+  about: "About"
+
+home:
+  recent_posts: "Recent Posts"
+
+post:
+  prev: "Previous"
+  next: "Next"
+  updated_at: "updated on"
+
+rating:
+  question: "Did you like this article?"
+  hint: "Rate it from 1 to 5 stars"
+  count: "ratings"
+  thanks: "Thanks for your rating!"
+
+comments:
+  heading: "💬 Comments"
+  count_suffix: "comment(s)"
+  form_title: "Leave your comment"
+  name_label: "Name *"
+  name_placeholder: "Your name"
+  text_label: "Comment *"
+  text_placeholder: "Write your comment here..."
+  chars_suffix: "characters"
+  submit: "Post Comment"
+  submitting: "Posting..."
+  empty: "Be the first to comment on this article 🎉"
+
+footer:
+  tagline: "Developer Blog"
