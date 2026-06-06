@@ -1,4 +1,40 @@
 <head prefix="og: http://ogp.me/ns#">
+  {%- comment -%}
+    Detección automática de idioma (solo 1ª visita). Inline y temprano para evitar
+    parpadeo. Guarda la preferencia en localStorage; el selector ES|EN la sobrescribe,
+    así que la elección manual del visitante siempre tiene prioridad.
+  {%- endcomment -%}
+  <script>
+  (function () {
+    try {
+      var KEY = 'preferred_lang';
+      var DEFAULT = 'es';
+      var SUPPORTED = ['es', 'en'];
+      var path = location.pathname;
+      var current = (path === '/en' || path.indexOf('/en/') === 0) ? 'en' : 'es';
+
+      var pref = null;
+      try { pref = localStorage.getItem(KEY); } catch (e) {}
+
+      if (SUPPORTED.indexOf(pref) === -1) {
+        // Primera visita: detectar del navegador y recordar la decisión.
+        var langs = navigator.languages || [navigator.language || navigator.userLanguage || DEFAULT];
+        pref = DEFAULT;
+        for (var i = 0; i < langs.length; i++) {
+          var code = (langs[i] || '').toLowerCase();
+          if (code.indexOf('en') === 0) { pref = 'en'; break; }
+          if (code.indexOf('es') === 0) { pref = 'es'; break; }
+        }
+        try { localStorage.setItem(KEY, pref); } catch (e) {}
+      }
+
+      if (pref === current) return; // ya estás en el idioma correcto
+
+      var target = (pref === 'en') ? ('/en' + path) : path.replace(/^\/en(\/|$)/, '/');
+      if (target !== path) { location.replace(target + location.search + location.hash); }
+    } catch (e) { /* nunca romper la página por la detección */ }
+  })();
+  </script>
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
