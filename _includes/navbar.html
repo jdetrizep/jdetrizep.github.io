@@ -187,8 +187,19 @@
           <a class="menu-link {% if url == '/about/' %}active{% endif %}" href="/about">about</a>
         {%- endif -%}
 
-        {%- comment -%} Selector de idioma ES | EN. static_href evita que polyglot
-        reescriba estos enlaces con el prefijo del idioma activo. {%- endcomment -%}
+        {%- comment -%} Selector de idioma con banderas (España 🇪🇸 / Reino Unido 🇬🇧).
+        static_href evita que polyglot prefije estos enlaces con el idioma activo. {%- endcomment -%}
+        <style>
+          .lang-switcher { display: inline-flex; align-items: center; gap: 0.15rem; }
+          .lang-link { display: inline-flex; align-items: center; gap: 0.35em; }
+          .lang-link .flag-icon {
+            height: 0.95em; width: auto; display: inline-block; border-radius: 2px;
+            box-shadow: 0 0 0 0.5px rgba(128,128,128,0.45); vertical-align: middle;
+            transition: opacity 0.2s, transform 0.2s;
+          }
+          .lang-link:not(.active) .flag-icon { opacity: 0.5; }
+          .lang-link:hover .flag-icon { opacity: 1; transform: translateY(-1px); }
+        </style>
         <span class="lang-switcher">
           {%- for lang in site.languages -%}
             {%- if lang == site.default_lang -%}
@@ -196,7 +207,14 @@
             {%- else -%}
               {%- capture lhref %}{{ site.baseurl }}/{{ lang }}{{ page.url }}{% endcapture -%}
             {%- endif -%}
-            <a class="menu-link lang-link{% if lang == site.active_lang %} active{% endif %}" data-lang="{{ lang }}" onclick="try{localStorage.setItem('preferred_lang','{{ lang }}')}catch(e){}" {% static_href %}href="{{ lhref }}"{% endstatic_href %}>{{ lang | upcase }}</a>
+            <a class="menu-link lang-link{% if lang == site.active_lang %} active{% endif %}" data-lang="{{ lang }}" onclick="try{localStorage.setItem('preferred_lang','{{ lang }}')}catch(e){}" {% static_href %}href="{{ lhref }}"{% endstatic_href %}>
+              {%- case lang -%}
+              {%- when 'es' -%}
+                <svg class="flag-icon" viewBox="0 0 3 2" aria-hidden="true"><rect width="3" height="2" fill="#AA151B"/><rect width="3" height="1" y="0.5" fill="#F1BF00"/></svg>
+              {%- when 'en' -%}
+                <svg class="flag-icon" viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk-s"><path d="M0,0 v30 h60 v-30 z"/></clipPath><clipPath id="uk-t"><path d="M30,15 h30 v15 z v15 h-30 z h-30 v-15 z v-15 h30 z"/></clipPath><g clip-path="url(#uk-s)"><path d="M0,0 v30 h60 v-30 z" fill="#012169"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/><path d="M0,0 L60,30 M60,0 L0,30" clip-path="url(#uk-t)" stroke="#C8102E" stroke-width="4"/><path d="M30,0 v30 M0,15 h60" stroke="#fff" stroke-width="10"/><path d="M30,0 v30 M0,15 h60" stroke="#C8102E" stroke-width="6"/></g></svg>
+              {%- endcase -%}
+              {{ lang | upcase }}</a>
           {%- endfor -%}
         </span>
       </nav>
