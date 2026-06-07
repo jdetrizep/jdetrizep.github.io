@@ -2,8 +2,8 @@
 lang: en
 layout: post
 title: "AI-First in Project Management: when AI takes a seat on the team"
-date: 2026-06-09 05:00
-modified: 2026-06-09 05:00
+date: 2026-06-08 05:00
+modified: 2026-06-08 05:00
 description: "Orchestrated Agility — how project management, Scrum ceremonies, and the developer profile change when an AI agent is just another member of the team"
 permalink: /AI_First_Gestion_Proyectos_Orquestado/
 tag:
