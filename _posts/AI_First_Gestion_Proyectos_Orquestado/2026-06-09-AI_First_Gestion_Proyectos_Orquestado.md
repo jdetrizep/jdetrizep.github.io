@@ -2,8 +2,8 @@
 lang: es
 layout: post
 title: "AI-First en la Gestión de Proyectos: cuando la IA se sienta en el equipo"
-date: 2026-06-09 05:00
-modified: 2026-06-09 05:00
+date: 2026-06-08 05:00
+modified: 2026-06-08 05:00
 description: "Agilismo Orquestado — cómo cambia la gestión de proyectos, las ceremonias Scrum y el perfil del desarrollador cuando un agente de IA es un miembro más del equipo"
 tag:
   - AI-First
