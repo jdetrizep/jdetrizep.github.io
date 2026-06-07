@@ -94,6 +94,7 @@ Scrum no muere. Se adapta. Las ceremonias siguen existiendo, pero el objeto de c
 Esta no existía en Scrum clásico. Y es la que más cambia la dinámica del equipo. En el modelo tradicional, el code review era privado — entre el autor y un revisor técnico. Aquí el output del agente pertenece al equipo completo, porque nadie lo escribió.
 
 Eso crea algo poderoso:
+
 👉 El PO puede señalar un error de lógica de negocio sin saber leer el código.  
 👉 El arquitecto puede detectar un patrón roto sin conocer el dominio.  
 👉 El QA puede identificar casos no cubiertos antes de que se escriba un solo test manual.

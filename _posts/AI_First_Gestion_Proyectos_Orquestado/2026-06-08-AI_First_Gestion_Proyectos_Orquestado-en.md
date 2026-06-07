@@ -95,6 +95,7 @@ Scrum does not die. It adapts. The ceremonies still exist, but the object of con
 This did not exist in classic Scrum. And it is the one that changes the team dynamic the most. In the traditional model, code review was private — between the author and a technical reviewer. Here the agent's output belongs to the whole team, because nobody wrote it.
 
 That creates something powerful:
+
 👉 The PO can point out a business logic error without knowing how to read the code.  
 👉 The architect can detect a broken pattern without knowing the domain.  
 👉 The QA can identify uncovered cases before a single manual test is written.
