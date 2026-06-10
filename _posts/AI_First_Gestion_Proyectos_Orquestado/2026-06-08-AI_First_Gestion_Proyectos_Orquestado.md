@@ -15,7 +15,7 @@ tag:
 image: /AI_First_Gestion_Proyectos_Orquestado/AI_First_Gestion_Proyectos_Portada1.png
 ---
 
-# 🧠 AI-First en la Gestión de Proyectos: cuando la IA se sienta en el equipo DANI!!!
+# 🧠 AI-First en la Gestión de Proyectos: cuando la IA se sienta en el equipo
 
 Cuando hablamos de gestión de proyectos con IA, la conversación suele desviarse hacia un lugar equivocado. Hacia los proyectos **de** inteligencia artificial. Hacia modelos, datasets, pipelines de ML. Pero eso no es de lo que trata este artículo.
 
