@@ -2,8 +2,8 @@
 lang: es
 layout: post
 title: "El mayor reto de la IA no es tecnológico es desaprender."
-date: 2026-07-01 05:00
-modified: 2026-07-01 05:00
+date: 2026-09-15 05:00
+modified: 2026-09-15 05:00
 description: "Reflexiones sobre cómo los desarrolladores senior y junior adoptan la Inteligencia Artificial de manera diferente, y por qué desaprender es clave para aprovechar al máximo estas herramientas."
 permalink: /AI_Senior_Junior/
 tag:

@@ -2,8 +2,8 @@
 lang: en
 layout: post
 title: "The biggest challenge of AI is not technological. It is unlearning."
-date: 2026-07-01 05:00
-modified: 2026-07-01 05:00
+date: 2026-09-15 05:00
+modified: 2026-09-15 05:00
 description: "Reflections on how senior and junior developers adopt Artificial Intelligence differently, and why unlearning is key to making the most of these tools."
 permalink: /AI_Senior_Junior/
 tag:
