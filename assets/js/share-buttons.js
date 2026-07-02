@@ -1,39 +1,44 @@
 function copyToClipboard(text, event) {
+  const button = event ? event.currentTarget : null;
+  const copiedLabel = button?.dataset?.copiedLabel || '✓ Copied';
+  const successMessage = button?.dataset?.copySuccess || '✓ Link copied to clipboard';
+  const errorMessage = button?.dataset?.copyError || '✗ Could not copy the link';
+
   navigator.clipboard.writeText(text).then(function() {
-    // Cambiar el botón temporalmente
-    const button = event ? event.currentTarget : null;
+    // Change button text temporarily
     if (!button) {
-      // Mostrar solo el toast sin el alert
+      // Show only toast notification
       const toast = document.createElement('div');
       toast.className = 'copy-toast';
-      toast.textContent = '✓ Enlace copiado al portapapeles';
+      toast.textContent = successMessage;
       document.body.appendChild(toast);
       setTimeout(() => toast.remove(), 2000);
       return;
     }
+
     const originalText = button.querySelector('span').textContent;
-    button.querySelector('span').textContent = '✓ Copiado';
+    button.querySelector('span').textContent = copiedLabel;
     button.classList.add('copied');
     
-    // Mostrar toast
+    // Show toast notification
     const toast = document.createElement('div');
     toast.className = 'copy-toast';
-    toast.textContent = '✓ Enlace copiado al portapapeles';
+    toast.textContent = successMessage;
     document.body.appendChild(toast);
     
-    // Restaurar después de 2 segundos
+    // Restore original state after 2 seconds
     setTimeout(() => {
       button.querySelector('span').textContent = originalText;
       button.classList.remove('copied');
       toast.remove();
     }, 2000);
   }).catch(function(err) {
-    console.error('Error al copiar:', err);
+    console.error('Copy failed:', err);
     
-    // Mostrar toast de error en lugar de alert
+    // Show error toast instead of alert
     const errorToast = document.createElement('div');
     errorToast.className = 'copy-toast error';
-    errorToast.textContent = '✗ No se pudo copiar el enlace';
+    errorToast.textContent = errorMessage;
     document.body.appendChild(errorToast);
     
     setTimeout(() => errorToast.remove(), 3000);

@@ -50,5 +50,18 @@ search:
   link_archive: "📚 Post Archive"
   link_tags: "🏷️ Tags"
 
+share:
+  heading: "Share this article"
+  twitter_aria: "Share on Twitter"
+  linkedin_aria: "Share on LinkedIn"
+  facebook_aria: "Share on Facebook"
+  whatsapp_aria: "Share on WhatsApp"
+  telegram_aria: "Share on Telegram"
+  copy_link_aria: "Copy link"
+  copy: "Copy"
+  copied: "✓ Copied"
+  copy_success: "✓ Link copied to clipboard"
+  copy_error: "✗ Could not copy the link"
+
 author:
   bio: "Expert in banking systems development with 18+ years of experience. Specialized in mobile technologies, backend and IBM i systems. <br> <strong> IBM Champion 2026 | IBM Influencer 2025 | IBM Advocate 2025 | IBM Contributor 2025 </strong> | Microsoft Certified Professional | Oracle Cloud Certified AI | Cybersecurity Awareness Professional | Lean Six Sigma White Belt | Certified Scrum Master | IBM Enterprise Design Thinking."
