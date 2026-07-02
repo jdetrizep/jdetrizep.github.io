@@ -13,7 +13,7 @@ tag:
   - IBM i
   - Java
   - Modernization
-image: /Bob2_Premium_Package/Portada_Bob2.png
+image: /Bob2_Premium_Package/Portada_Bob2_en.png
 ---
 
 # 🧠 Bob 2.0 and Premium Packages: IBM i and Java modernization enters a new league
@@ -27,7 +27,7 @@ Today I want to talk about three things that are really one story:
 Because that is exactly what separates "an AI that helps you code" from "a real modernization partner." And it is already here.
 
 <figure>
-<img src="./Portada_Bob2.png" alt="Bob 2.0 and Premium Packages" loading="lazy" />
+<img src="./Portada_Bob2_en.png" alt="Bob 2.0 and Premium Packages" loading="lazy" />
 <figcaption>Fig 1. Bob 2.0 and Premium Packages.</figcaption>
 </figure>
 
