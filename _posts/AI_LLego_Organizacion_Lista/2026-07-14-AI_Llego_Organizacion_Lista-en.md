@@ -2,8 +2,8 @@
 lang: en
 layout: post
 title: "The AI Era Has Arrived. Is Your Organization Ready for This New Era?"
-date: 2026-07-21 05:00
-modified: 2026-07-21 05:00
+date: 2026-07-14 05:00
+modified: 2026-07-14 05:00
 description: "The AI era has arrived. Is your organization ready for this new era?"
 permalink: /AI_Llego_Organizacion_Lista/
 tag:

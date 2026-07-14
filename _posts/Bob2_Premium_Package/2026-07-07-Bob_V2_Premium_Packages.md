@@ -1,7 +1,7 @@
 ---
 lang: es
 layout: post
-title: "Bob 2.0 y los Premium Packages: la modernización de IBM i y Java entra en otra liga"
+title: "Bob 2.0 y los Premium Packages"
 date: 2026-07-07 05:00
 modified: 2026-07-07 05:00
 description: "Descubre cómo Bob 2.0 y los Premium Packages transforman la modernización de aplicaciones IBM i y Java, llevando la IA desde un simple asistente de desarrollo hasta un verdadero agente especializado para el SDLC."

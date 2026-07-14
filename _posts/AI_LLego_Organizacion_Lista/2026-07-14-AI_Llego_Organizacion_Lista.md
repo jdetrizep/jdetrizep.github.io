@@ -2,8 +2,8 @@
 lang: es
 layout: post
 title: "La IA ya llegó. ¿Tu organización está lista para esta nueva era?"
-date: 2026-07-21 05:00
-modified: 2026-07-21 05:00
+date: 2026-07-14 05:00
+modified: 2026-07-14 05:00
 description: "La IA ya llegó. ¿Tu organización está lista para esta nueva era?"
 permalink: /AI_Llego_Organizacion_Lista/
 tag:
