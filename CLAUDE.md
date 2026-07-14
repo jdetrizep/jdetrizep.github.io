@@ -25,7 +25,7 @@ No hay suite de tests ni linter: **`bundle exec jekyll build` es la verificació
 
 ## Despliegue
 
-El sitio **NO** usa el despliegue "branch" de GitHub Pages. Usa el workflow [.github/workflows/jekyll.yml](.github/workflows/jekyll.yml): cada push a `main` hace `jekyll build` con `JEKYLL_ENV=production` y publica `_site/`. Hay además un **cron semanal (lunes 12:00 UTC)** cuyo único propósito es publicar posts con **fecha futura** (Jekyll no los incluye hasta que su `date` ha pasado). Por eso es normal tener posts fechados en el futuro en `_posts/`.
+El sitio **NO** usa el despliegue "branch" de GitHub Pages. Usa el workflow [.github/workflows/jekyll.yml](.github/workflows/jekyll.yml): cada push a `main` hace `jekyll build` con `JEKYLL_ENV=production` y publica `_site/`. Hay además un **cron semanal (lunes y martes 12:00 UTC)** cuyo único propósito es publicar posts con **fecha futura** (Jekyll no los incluye hasta que su `date` ha pasado). Por eso es normal tener posts fechados en el futuro en `_posts/`.
 
 ## Arquitectura de contenido
 

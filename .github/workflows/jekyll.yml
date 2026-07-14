@@ -15,9 +15,9 @@ on:
   workflow_dispatch:
 
   # Scheduled builds to publish future-dated posts
-  # Runs every Monday at 12:00 UTC (6:00 AM Costa Rica time)
+  # Runs every Monday and Tuesday at 12:00 UTC (6:00 AM Costa Rica time)
   schedule:
-    - cron: '0 12 * * 1'
+    - cron: '0 12 * * 1,2'
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
