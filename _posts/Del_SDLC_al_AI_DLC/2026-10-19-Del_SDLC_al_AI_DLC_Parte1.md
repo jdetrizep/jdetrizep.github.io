@@ -2,10 +2,10 @@
 lang: es
 layout: post
 title: "Del SDLC al AI-DLC: el contexto lo cambió todo."
-date: 2026-10-20 05:00
-modified: 2026-10-20 05:00
+date: 2026-10-19 05:00
+modified: 2026-10-19 05:00
 description: "El contexto como motor de la evolución hacia AI-DLC."
-permalink: /Del_SDLC_al_AI_DLC/
+permalink: /Del_SDLC_al_AI_DLC_parte1/
 tag:
   - AI-DLC
   - SDLC

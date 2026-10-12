@@ -2,10 +2,10 @@
 lang: en
 layout: post
 title: "From SDLC to AI-DLC: context changed everything."
-date: 2026-10-20 05:00
-modified: 2026-10-20 05:00
+date: 2026-10-19 05:00
+modified: 2026-10-19 05:00
 description: "Context as the engine of the evolution toward AI-DLC."
-permalink: /Del_SDLC_al_AI_DLC/
+permalink: /Del_SDLC_al_AI_DLC_parte1/
 tag:
   - AI-DLC
   - SDLC
